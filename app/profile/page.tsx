@@ -109,6 +109,77 @@ export default function ProfilePage() {
           </div>
         </div>
 
+        {/* 타임라인 섹션 */}
+<div className="mt-64 mb-32 relative">
+  {/* 상단 제목 */}
+  <div className="flex flex-col items-center mb-24">
+    <div className="h-[1px] w-12 bg-[#e2002b] mb-4"></div>
+    <h3 className="text-[13px] font-black tracking-[0.6em] text-white uppercase italic">
+      The Chronicle of Origin
+    </h3>
+  </div>
+
+  <div className="relative max-w-2xl mx-auto px-6">
+    {/* 중앙 수직선 */}
+    <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-[#e2002b] via-[#222] to-transparent transform -translate-x-1/2"></div>
+
+    <div className="space-y-32">
+      {/* 1996 - 상혁 출생 */}
+      <div className="relative flex items-center justify-between">
+        <div className="w-[42%] text-right group">
+          <span className="text-[11px] font-black text-[#e2002b] tracking-tighter">1996</span>
+          <p className="text-white text-[16px] font-bold mt-1">서울, 이상혁 출생</p>
+          <div className="h-[1px] w-0 group-hover:w-full bg-[#e2002b]/30 transition-all duration-500 ml-auto mt-1"></div>
+        </div>
+        <div className="z-10 w-2.5 h-2.5 bg-[#e2002b] rounded-full shadow-[0_0_10px_#e2002b]"></div>
+        <div className="w-[42%]"></div>
+      </div>
+
+      {/* 2004 - 유현 출생 */}
+      <div className="relative flex items-center justify-between">
+        <div className="w-[42%]"></div>
+        <div className="z-10 w-2.5 h-2.5 bg-white rounded-full shadow-[0_0_10px_#fff]"></div>
+        <div className="w-[42%] text-left group">
+          <span className="text-[11px] font-black text-[#666]">2004</span>
+          <p className="text-white text-[16px] font-bold mt-1">인천, 이유현 출생</p>
+          <div className="h-[1px] w-0 group-hover:w-full bg-white/30 transition-all duration-500 mt-1"></div>
+        </div>
+      </div>
+
+      {/* 2013 - 상혁 데뷔 */}
+      <div className="relative flex items-center justify-between">
+        <div className="w-[42%] text-right group">
+          <span className="text-[11px] font-black text-[#e2002b]">2013</span>
+          <p className="text-white text-[15px] font-medium mt-1">이상혁 프로게이머 데뷔</p>
+        </div>
+        <div className="z-10 w-2 h-2 bg-[#e2002b] rounded-full"></div>
+        <div className="w-[42%]"></div>
+      </div>
+
+      {/* 2024 - 유현 입학 */}
+      <div className="relative flex items-center justify-between">
+        <div className="w-[42%]"></div>
+        <div className="z-10 w-2 h-2 bg-white rounded-full"></div>
+        <div className="w-[42%] text-left group">
+          <span className="text-[11px] font-black text-[#666]">2024</span>
+          <p className="text-white text-[15px] font-medium mt-1">이유현 인공지능공학과 입학</p>
+        </div>
+      </div>
+
+      {/* 2025 - 상혁 쓰리핏 */}
+      <div className="relative flex items-center justify-between">
+        <div className="w-[42%] text-right group">
+          <span className="text-[12px] font-black text-[#e2002b] tracking-widest">2025</span>
+          <p className="text-[#e2002b] text-[17px] font-black mt-1 leading-tight">이상혁 월즈 쓰리핏 달성</p>
+          <p className="text-[9px] text-[#444] mt-1 font-bold tracking-[0.2em] uppercase">The Greatest of All Time</p>
+        </div>
+        <div className="z-10 w-4 h-4 bg-[#e2002b] rounded-full ring-4 ring-[#e2002b]/20 shadow-[0_0_15px_rgba(226,0,43,0.5)]"></div>
+        <div className="w-[42%]"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
         {/* 하단 메인으로 돌아가기 버튼 */}
         <div className="mt-40 pt-12 border-t border-[#111111] flex justify-center">
           <Link 
