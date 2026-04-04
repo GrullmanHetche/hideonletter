@@ -83,7 +83,7 @@ export default function Home() {
                 <div className="space-y-8 py-10 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                   <div className="h-[1px] w-12 bg-[#e2002b]"></div>
                   <div className="text-[15px] leading-loose text-stone-300 font-light break-keep">
-                    "오늘 경기 너무 멋있었어요!😍
+                    "오늘 경기 너무 멋있었어요! 😍 
                     중계 화면으로 보니까 조그매서 뭔가 귀여웠어요. <br /><br />
                     과제도 많고 할 공부도 많은 하루지만 2세트에서 깔끔하게 끝내서 너무 힘났당 ₍ᐢɞ̴̶̷.̮ɞ̴̶̷ᐢ₎ "
                   </div>
