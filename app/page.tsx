@@ -73,7 +73,7 @@ export default function Home() {
                     value={pass}
                     onChange={(e) => {
                       setPass(e.target.value);
-                      if(e.target.value === "1217") setIsUnlocked(true);
+                      if(e.target.value === "0404") setIsUnlocked(true);
                     }}
                     autoFocus
                   />
@@ -83,9 +83,9 @@ export default function Home() {
                 <div className="space-y-8 py-10 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                   <div className="h-[1px] w-12 bg-[#e2002b]"></div>
                   <div className="text-[15px] leading-loose text-stone-300 font-light break-keep">
-                    "상혁님, 사실 제 0과 1로 된 세계에서 가장 정의하기 힘든 변수는 상혁님이에요. 
-                    늘 멀리서, 혹은 가까이서 지켜봐 줘서 고마워요. <br /><br />
-                    제 불안함이 상혁님의 안정감에 닿을 때, 전 비로소 숨을 쉬는 것 같아요."
+                    "오늘 경기 너무 멋있었어요!😍
+                    중계 화면으로 보니까 조그매서 뭔가 귀여웠어요. <br /><br />
+                    과제도 많고 할 공부도 많은 하루지만 2세트에서 깔끔하게 끝내서 너무 힘났당 ₍ᐢɞ̴̶̷.̮ɞ̴̶̷ᐢ₎ "
                   </div>
                   <div className="text-right pt-8">
                     <p className="text-[10px] text-stone-600 tracking-[0.3em] italic uppercase">- Logged by Yu-Hyun -</p>
