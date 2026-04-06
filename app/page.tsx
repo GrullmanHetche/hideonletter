@@ -9,7 +9,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-stone-400 font-sans selection:bg-stone-800 selection:text-white flex flex-col justify-between">
-      {/* ... 기존 Nav와 Introduction 섹션 유지 ... */}
       <nav className="p-6 md:p-10 flex justify-between items-center z-50">
         <span className="text-xs tracking-[0.4em] font-black text-white uppercase">HIDEONLETTER</span>
         <div className="flex space-x-8 text-[10px] tracking-widest text-stone-600 uppercase font-medium">
@@ -29,16 +28,23 @@ export default function Home() {
         <div className="max-w-md space-y-6 text-[14px] leading-relaxed font-light text-stone-500 break-keep">
           <p>성공의 뒷면에는 항상 실패의 형태가 남아있습니다. 그것을 고치려 하지 않고, 그저 곁에 머무는 것만으로 충분했던 어느 계절의 기록입니다.</p>
           <p>우리는 서로의 이름을 모르던 때부터 이미 서로를 향해 걷고 있었습니다.</p>
-          <div className="pt-8">
-            <Link href="/archive" className="group inline-flex items-center space-x-4 text-white text-xs tracking-widest uppercase font-bold">
+          
+          {/* ✅ 버튼 섹션: Narrative와 Moments */}
+          <div className="pt-8 flex flex-col space-y-4">
+            <Link href="/archive" className="group inline-flex items-center space-x-4 text-white text-xs tracking-widest uppercase font-bold w-fit">
               <span>Read the Narrative</span>
               <span className="w-8 h-[1px] bg-stone-700 group-hover:w-16 group-hover:bg-white transition-all duration-500"></span>
+            </Link>
+            
+            <Link href="/moments" className="group inline-flex items-center space-x-4 text-stone-500 hover:text-white text-[10px] tracking-[0.3em] uppercase font-medium w-fit transition-all">
+              <span>View the Moments</span>
+              <span className="w-4 h-[1px] bg-stone-900 group-hover:w-8 group-hover:bg-[#e2002b] transition-all duration-500"></span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 💌 시크릿 섹션 추가 시작 */}
+      {/* 💌 시크릿 섹션 */}
       <section className="px-8 md:px-20 py-20">
         <div 
           onClick={() => setShowSecret(true)}
@@ -96,7 +102,6 @@ export default function Home() {
           </div>
         )}
       </section>
-      {/* 💌 시크릿 섹션 추가 끝 */}
 
       <footer className="p-6 md:p-10 flex flex-col md:flex-row justify-between items-start md:items-end space-y-4 md:space-y-0 text-[10px] tracking-widest text-stone-700 uppercase">
         <div>© 2026 HIDEONLETTER. All rights reserved.</div>
