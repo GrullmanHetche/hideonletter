@@ -18,26 +18,26 @@ export default function Home() {
       ══════════════════════════════ */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
 
-        {/* ① 롤 마법진 — 오른쪽 하단, 훨씬 크고 선명하게 */}
+        {/* ① 메인 롤 마법진 — 오른쪽, 훨씬 선명하게 */}
         <svg
-          className="absolute bottom-[-200px] right-[-200px] w-[900px] h-[900px] opacity-[0.09]"
+          className="absolute top-1/2 right-[-180px] -translate-y-1/2 w-[820px] h-[820px]"
           viewBox="0 0 400 400"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* 동심원 레이어 */}
-          <circle cx="200" cy="200" r="192" stroke="#E4002B" strokeWidth="1" />
-          <circle cx="200" cy="200" r="186" stroke="#C89B3C" strokeWidth="0.5" strokeDasharray="2 4" />
-          <circle cx="200" cy="200" r="170" stroke="#E4002B" strokeWidth="0.6" />
-          <circle cx="200" cy="200" r="155" stroke="#C89B3C" strokeWidth="0.4" strokeDasharray="6 4" />
-          <circle cx="200" cy="200" r="138" stroke="#E4002B" strokeWidth="0.8" />
-          <circle cx="200" cy="200" r="130" stroke="#C89B3C" strokeWidth="0.3" strokeDasharray="3 6" />
-          <circle cx="200" cy="200" r="110" stroke="#E4002B" strokeWidth="0.5" />
-          <circle cx="200" cy="200" r="88"  stroke="#C89B3C" strokeWidth="0.6" />
-          <circle cx="200" cy="200" r="65"  stroke="#E4002B" strokeWidth="0.8" />
-          <circle cx="200" cy="200" r="44"  stroke="#C89B3C" strokeWidth="0.5" strokeDasharray="2 3" />
-          <circle cx="200" cy="200" r="26"  stroke="#E4002B" strokeWidth="1" />
-          <circle cx="200" cy="200" r="10"  stroke="#C89B3C" strokeWidth="1.5" />
+          {/* 동심원 — opacity 올려서 선명하게 */}
+          <circle cx="200" cy="200" r="192" stroke="#E4002B" strokeWidth="1.2" opacity="0.35" />
+          <circle cx="200" cy="200" r="186" stroke="#C89B3C" strokeWidth="0.6" strokeDasharray="2 4" opacity="0.25" />
+          <circle cx="200" cy="200" r="170" stroke="#E4002B" strokeWidth="0.8" opacity="0.30" />
+          <circle cx="200" cy="200" r="155" stroke="#C89B3C" strokeWidth="0.6" strokeDasharray="6 4" opacity="0.22" />
+          <circle cx="200" cy="200" r="138" stroke="#E4002B" strokeWidth="1.0" opacity="0.28" />
+          <circle cx="200" cy="200" r="130" stroke="#C89B3C" strokeWidth="0.5" strokeDasharray="3 6" opacity="0.18" />
+          <circle cx="200" cy="200" r="110" stroke="#E4002B" strokeWidth="0.7" opacity="0.25" />
+          <circle cx="200" cy="200" r="88"  stroke="#C89B3C" strokeWidth="0.8" opacity="0.22" />
+          <circle cx="200" cy="200" r="65"  stroke="#E4002B" strokeWidth="1.0" opacity="0.28" />
+          <circle cx="200" cy="200" r="44"  stroke="#C89B3C" strokeWidth="0.6" strokeDasharray="2 3" opacity="0.20" />
+          <circle cx="200" cy="200" r="26"  stroke="#E4002B" strokeWidth="1.2" opacity="0.35" />
+          <circle cx="200" cy="200" r="10"  stroke="#C89B3C" strokeWidth="2.0" opacity="0.40" />
 
           {/* 방사형 라인 24개 */}
           {Array.from({ length: 24 }).map((_, i) => {
@@ -46,7 +46,7 @@ export default function Home() {
             const y1 = 200 + Math.sin(angle) * 26;
             const x2 = 200 + Math.cos(angle) * 192;
             const y2 = 200 + Math.sin(angle) * 192;
-            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#E4002B" strokeWidth="0.3" opacity="0.7" />;
+            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#E4002B" strokeWidth="0.4" opacity="0.20" />;
           })}
 
           {/* 12각형 룬 외곽 */}
@@ -55,7 +55,7 @@ export default function Home() {
               const a = (i * 30 - 90) * Math.PI / 180;
               return `${200 + Math.cos(a) * 170},${200 + Math.sin(a) * 170}`;
             }).join(' ');
-            return <polygon points={pts} stroke="#C89B3C" strokeWidth="0.5" fill="none" />;
+            return <polygon points={pts} stroke="#C89B3C" strokeWidth="0.7" fill="none" opacity="0.30" />;
           })()}
 
           {/* 8각형 내부 룬 */}
@@ -64,7 +64,7 @@ export default function Home() {
               const a = (i * 45 - 22.5) * Math.PI / 180;
               return `${200 + Math.cos(a) * 110},${200 + Math.sin(a) * 110}`;
             }).join(' ');
-            return <polygon points={pts} stroke="#E4002B" strokeWidth="0.5" fill="none" />;
+            return <polygon points={pts} stroke="#E4002B" strokeWidth="0.7" fill="none" opacity="0.28" />;
           })()}
 
           {/* 6각형 중심 룬 */}
@@ -73,10 +73,10 @@ export default function Home() {
               const a = (i * 60 - 30) * Math.PI / 180;
               return `${200 + Math.cos(a) * 65},${200 + Math.sin(a) * 65}`;
             }).join(' ');
-            return <polygon points={pts} stroke="#C89B3C" strokeWidth="0.7" fill="none" />;
+            return <polygon points={pts} stroke="#C89B3C" strokeWidth="1.0" fill="none" opacity="0.35" />;
           })()}
 
-          {/* 골드 다이아몬드 마커 — 바깥 원 위 12개 */}
+          {/* 골드 다이아몬드 마커 — 12개 */}
           {Array.from({ length: 12 }).map((_, i) => {
             const angle = (i * 30 * Math.PI) / 180;
             const cx = 200 + Math.cos(angle) * 170;
@@ -84,62 +84,55 @@ export default function Home() {
             return (
               <rect key={i} x={cx - 4} y={cy - 4} width="8" height="8"
                 transform={`rotate(45 ${cx} ${cy})`}
-                fill="#C89B3C" fillOpacity="0.9" />
+                fill="#C89B3C" opacity="0.55" />
             );
           })}
 
-          {/* 레드 마커 — 중간 원 위 8개 */}
+          {/* 레드 원형 마커 — 8개 */}
           {Array.from({ length: 8 }).map((_, i) => {
             const angle = (i * 45 * Math.PI) / 180;
             const cx = 200 + Math.cos(angle) * 110;
             const cy = 200 + Math.sin(angle) * 110;
-            return (
-              <circle key={i} cx={cx} cy={cy} r="3.5"
-                fill="#E4002B" fillOpacity="0.9" />
-            );
+            return <circle key={i} cx={cx} cy={cy} r="3.5" fill="#E4002B" opacity="0.50" />;
           })}
 
           {/* 중심 별 */}
-          <circle cx="200" cy="200" r="4" fill="#C89B3C" fillOpacity="0.8" />
+          <circle cx="200" cy="200" r="5" fill="#C89B3C" opacity="0.60" />
+          <circle cx="200" cy="200" r="2" fill="#fff" opacity="0.30" />
         </svg>
 
-        {/* ② 작은 보조 마법진 — 왼쪽 상단 */}
+        {/* ② 보조 마법진 — 왼쪽 상단 */}
         <svg
-          className="absolute top-[-60px] left-[-60px] w-[280px] h-[280px] opacity-[0.04]"
+          className="absolute top-[-80px] left-[-80px] w-[320px] h-[320px]"
           viewBox="0 0 200 200"
           fill="none"
         >
-          <circle cx="100" cy="100" r="92" stroke="#C89B3C" strokeWidth="0.8" />
-          <circle cx="100" cy="100" r="75" stroke="#E4002B" strokeWidth="0.5" strokeDasharray="4 5" />
-          <circle cx="100" cy="100" r="55" stroke="#C89B3C" strokeWidth="0.6" />
-          <circle cx="100" cy="100" r="32" stroke="#E4002B" strokeWidth="0.5" />
+          <circle cx="100" cy="100" r="92" stroke="#C89B3C" strokeWidth="1.0" opacity="0.12" />
+          <circle cx="100" cy="100" r="75" stroke="#E4002B" strokeWidth="0.7" strokeDasharray="4 5" opacity="0.10" />
+          <circle cx="100" cy="100" r="55" stroke="#C89B3C" strokeWidth="0.8" opacity="0.10" />
+          <circle cx="100" cy="100" r="32" stroke="#E4002B" strokeWidth="0.6" opacity="0.10" />
           {Array.from({ length: 8 }).map((_, i) => {
             const angle = (i * 45 * Math.PI) / 180;
             const x1 = 100 + Math.cos(angle) * 32;
             const y1 = 100 + Math.sin(angle) * 32;
             const x2 = 100 + Math.cos(angle) * 92;
             const y2 = 100 + Math.sin(angle) * 92;
-            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#E4002B" strokeWidth="0.4" />;
+            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#E4002B" strokeWidth="0.4" opacity="0.08" />;
           })}
         </svg>
 
-        {/* ③ 수직 레드 라인들 */}
+        {/* ③ 수직 레드 라인 */}
         <div className="absolute top-0 left-[13%] w-[1px] h-[50vh] bg-gradient-to-b from-[#E4002B] to-transparent opacity-25" />
         <div className="absolute top-0 left-[14%] w-[1px] h-[25vh] bg-gradient-to-b from-[#E4002B] to-transparent opacity-10" />
 
-        {/* ④ 기울어진 골드 라인 */}
+        {/* ④ 골드 대각선 라인 */}
         <div
           className="absolute top-0 right-[7%] w-[1px] h-[60vh] bg-gradient-to-b from-[#C89B3C]/50 to-transparent"
           style={{ transform: 'rotate(6deg)', transformOrigin: 'top center' }}
         />
-        <div
-          className="absolute top-0 right-[9%] w-[1px] h-[35vh] bg-gradient-to-b from-[#C89B3C]/20 to-transparent"
-          style={{ transform: 'rotate(6deg)', transformOrigin: 'top center' }}
-        />
 
-        {/* ⑤ 수평 스캔라인 느낌 (롤 HUD 감성) */}
-        <div className="absolute top-[38%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#E4002B]/8 to-transparent" />
-        <div className="absolute top-[39%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#C89B3C]/5 to-transparent" />
+        {/* ⑤ 스캔라인 */}
+        <div className="absolute top-[38%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#E4002B]/10 to-transparent" />
       </div>
 
       {/* ══════════════════════════════
@@ -162,20 +155,21 @@ export default function Home() {
       ══════════════════════════════ */}
       <div className="flex-1 flex flex-col justify-center px-8 md:px-16 py-24 max-w-5xl relative z-10">
 
-        {/* T1 로고 — 크게 + 섹션 레이블 */}
-        <div className="flex items-center gap-5 mb-12">
+        {/* T1 로고 — 크게! */}
+        <div className="flex items-center gap-6 mb-12">
           <img
             src="/T1logo.png"
             alt="T1"
-            className="w-14 h-14 object-contain opacity-95 drop-shadow-[0_0_12px_rgba(228,0,43,0.4)]"
+            className="w-24 h-24 object-contain"
+            style={{ filter: 'drop-shadow(0 0 20px rgba(228,0,43,0.6)) drop-shadow(0 0 40px rgba(228,0,43,0.25))' }}
           />
-          <div className="w-[1px] h-8 bg-white/10" />
-          <div className="flex flex-col gap-1">
+          <div className="w-[1px] h-12 bg-white/10" />
+          <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-2">
               <div className="w-5 h-[2px] bg-[#E4002B]" />
               <span className="text-[9px] tracking-[0.55em] text-[#E4002B] uppercase font-black">Introduction</span>
             </div>
-            <span className="text-[9px] tracking-[0.3em] text-[#C89B3C]/50 uppercase font-bold">S.H.Lee × Y.H.Lee</span>
+            <span className="text-[9px] tracking-[0.3em] text-[#C89B3C]/60 uppercase font-bold">S.H.Lee × Y.H.Lee</span>
           </div>
         </div>
 
@@ -262,8 +256,8 @@ export default function Home() {
               <div className="space-y-8 py-10 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                 <div className="h-[2px] w-10 bg-[#E4002B]" />
                 <div className="text-[14px] leading-loose text-white/60 font-light break-keep">
-                  "져도 괜찮아! 무슨 경기 결과가 나와도 이커 씨는 마이혁이에요. <br /><br />
-                  항상 응원하는 거 알죠? ₍ᐢɞ̴̶̷.̮ɞ̴̶̷ᐢ₎ "
+                  "오늘 경기 때문에 많이 속상하죠? <br /><br />
+                  무슨 결과가 있더라도 이커 씨는 저에게 영원한 마이혁이에요. "
                 </div>
                 <div className="text-right pt-8">
                   <p className="text-[9px] text-white/20 tracking-[0.3em] italic uppercase">— Logged by Yu-Hyun —</p>
@@ -279,7 +273,7 @@ export default function Home() {
       ══════════════════════════════ */}
       <footer className="relative z-10 px-8 md:px-16 py-7 flex justify-between items-center border-t border-white/5 text-[9px] tracking-[0.35em] text-white/15 uppercase">
         <div className="flex items-center gap-3">
-          <img src="/T1logo.png" alt="T1" className="w-5 h-5 object-contain opacity-25" />
+          <img src="/T1logo.png" alt="T1" className="w-6 h-6 object-contain opacity-30" />
           <span>© 2026 HIDEONLETTER.</span>
         </div>
         <div className="flex items-center gap-3">
