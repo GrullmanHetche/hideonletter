@@ -17,7 +17,7 @@ const chapters = [
       "이름을 알 리 없었다. 그러나 이상하게도, 그는 그녀를 이미 알고 있는 기분이 들었다. 유현은 문 틈으로 몸을 미끄러뜨렸다. 숨을 죽이고, 발소리를 지우고, 심지어 자신의 무게마저 부정하려는 것처럼. 그녀는 마치, 존재하지 않는 것처럼 들어왔다.",
       "그 순간 상혁은 문득 생각했다.",
       "저건, 패배한 사람의 움직임이다. 패배는 결과가 아니라 형태였다. 몸에 남는 습관이었다. 유현은 뒷자리 빈 곳에 앉았다. 의자에 앉는 순간조차 완전히 내려앉지 못했다. 언제든 다시 일어나야 할 것처럼, 언제든 도망쳐야 할 것처럼.",
-      "그러나 상혁은 그녀를 가볍게 시선으로 쫓으면서도 말을 멈추지 않았다.",
+      "하지만 상혁은 그녀를 가볍게 시선으로 쫓으면서도 말을 멈추지 않았다.",
       "\"중요한 건, 계속하는 겁니다.\"",
       "그의 입은 계속 움직였고, 사람들은 계속 고개를 끄덕였다. 모든 것이 정상적으로 흘러가고 있었다. 그러나 그의 일부는 이미 그녀에게 가 있었다.",
       "상혁은 이유를 알 수 없었다.",
@@ -74,7 +74,9 @@ const chapters = [
 export default function Archive() {
   const [activeChapter, setActiveChapter] = useState(0);
   const [progress, setProgress] = useState(0);
-  const articleRef = useRef(null);
+  
+  // 수정사항: 타입을 HTMLElement로 지정하여 'never' 에러 해결
+  const articleRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,7 +85,9 @@ export default function Archive() {
       const scrolled = window.scrollY - el.offsetTop;
       const total = el.offsetHeight - window.innerHeight;
       setProgress(Math.min(100, Math.max(0, (scrolled / total) * 100)));
-      document.querySelectorAll('[data-chapter]').forEach((node, i) => {
+      
+      // 수정사항:querySelectorAll에 HTMLElement 타입을 지정하여 안정성 확보
+      document.querySelectorAll<HTMLElement>('[data-chapter]').forEach((node, i) => {
         if (node.getBoundingClientRect().top <= window.innerHeight / 2) setActiveChapter(i);
       });
     };
@@ -91,7 +95,7 @@ export default function Archive() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollTo = (i) => {
+  const scrollTo = (i: number) => {
     document.querySelector(`[data-chapter="${i}"]`)?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -162,7 +166,7 @@ export default function Archive() {
 
             <div className="space-y-7 text-[15px] leading-[2.1] font-light break-keep">
               {ch.content.map((para, i) => {
-                const isQuote = para.startsWith('"') || para.startsWith('"') || para.startsWith('\"');
+                const isQuote = para.startsWith('"') || para.startsWith('“') || para.startsWith('\"');
                 const isClimax = para === '그리고 그 증거 하나로, 나는, 조금 더 살아보고 싶어졌다.';
                 return (
                   <p key={i} className={
