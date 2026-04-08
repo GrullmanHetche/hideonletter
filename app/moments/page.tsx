@@ -41,64 +41,78 @@ const dialogues = [
 
 export default function MomentsPage() {
   return (
-    <main className="min-h-screen bg-[#030303] text-white font-sans selection:bg-[#E4002B]/20 overflow-x-hidden">
+    <main className="min-h-screen bg-[#030303] font-mono selection:bg-[#E4002B]/20 overflow-x-hidden">
 
       {/* 상단 레드 라인 */}
       <div className="fixed top-0 left-0 w-full h-[2px] bg-[#E4002B] z-50" />
 
+      {/* 롤 인게임 UI 느낌 — 좌측 패널 테두리 */}
+      <div className="fixed top-0 left-0 w-[3px] h-full bg-gradient-to-b from-[#E4002B] via-[#E4002B]/10 to-transparent z-40" />
+      <div className="fixed top-0 right-0 w-[1px] h-full bg-gradient-to-b from-[#C89B3C]/30 via-transparent to-transparent z-40" />
+
       {/* 뒤로가기 */}
       <Link
         href="/"
-        className="fixed top-6 left-6 md:left-12 text-[9px] tracking-[0.4em] text-white/20 hover:text-white transition-all uppercase font-black z-50 flex items-center gap-2"
+        className="fixed top-6 left-6 text-[9px] tracking-[0.4em] text-white/20 hover:text-[#E4002B] transition-all uppercase font-black z-50 flex items-center gap-2"
       >
-        <span className="text-[#E4002B]">←</span> BACK
+        <span>◄</span> BACK
       </Link>
 
-      <div className="max-w-lg mx-auto px-6 py-28">
+      {/* 상단 HUD 바 */}
+      <div className="fixed top-2 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4">
+        <div className="h-[1px] w-12 bg-[#E4002B]/40" />
+        <span className="text-[8px] font-black tracking-[0.5em] text-[#E4002B]/60 uppercase">Chat Log</span>
+        <div className="h-[1px] w-12 bg-[#E4002B]/40" />
+      </div>
 
-        {/* 헤더 */}
-        <header className="text-center mb-20 space-y-3">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-[1px] w-6 bg-[#E4002B]" />
-            <img src="/T1logo.png" alt="T1" className="w-4 h-4 object-contain opacity-50" />
-            <div className="h-[1px] w-6 bg-[#E4002B]" />
+      <div className="max-w-2xl mx-auto px-8 md:px-16 py-24">
+
+        {/* 헤더 — 시스템 메시지 느낌 */}
+        <header className="mb-16">
+          <div className="border border-[#E4002B]/15 bg-[#E4002B]/[0.03] px-5 py-4">
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-[#E4002B] text-[10px] font-black">■</span>
+              <span className="text-[9px] font-black tracking-[0.5em] text-[#E4002B]/70 uppercase">System</span>
+              <div className="flex-1 h-[1px] bg-[#E4002B]/10" />
+            </div>
+            <p className="text-[11px] text-white/25 font-mono tracking-wide">
+              // DIALOGUE_FRAGMENTS.log — 어느 날, 우리가 나누었던 조각들.
+            </p>
           </div>
-          <h2 className="text-[10px] tracking-[0.7em] text-white/20 uppercase font-black">Dialogue Fragments</h2>
-          <p className="text-white/15 text-[10px] italic tracking-wider">"어느 날, 우리가 나누었던 조각들."</p>
         </header>
 
         {/* 대화 그룹 */}
-        <div className="space-y-20">
+        <div className="space-y-16">
           {dialogues.map((group, groupIdx) => (
-            <div key={groupIdx} className="space-y-6">
+            <div key={groupIdx} className="space-y-3">
 
-              {/* 날짜 */}
-              <div className="flex items-center gap-3 sticky top-6 z-10">
-                <div className="h-[1px] flex-1 bg-white/5" />
-                <span className="text-[9px] font-black text-[#E4002B] tracking-[0.3em] italic bg-[#030303] px-3 py-1 border border-[#E4002B]/20">
-                  {group.date}
-                </span>
-                <div className="h-[1px] flex-1 bg-white/5" />
+              {/* 날짜 — 시스템 로그 느낌 */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-[#C89B3C]/60 text-[9px] font-black">▶</span>
+                <span className="text-[9px] font-black text-[#C89B3C]/60 tracking-[0.3em]">{group.date}</span>
+                <div className="flex-1 h-[1px] bg-[#C89B3C]/10" />
               </div>
 
               {/* 메시지들 */}
-              <div className="space-y-4">
+              <div className="space-y-2">
                 {group.messages.map((msg, msgIdx) => (
-                  <div key={msgIdx} className={`flex flex-col ${msg.side === 'right' ? 'items-end' : 'items-start'}`}>
+                  <div key={msgIdx} className="flex items-start gap-3 group">
 
-                    {/* 발신자 이름 */}
-                    <span className={`text-[9px] font-black tracking-[0.3em] uppercase mb-1.5 ${msg.side === 'right' ? 'text-[#E4002B]/50' : 'text-white/20'}`}>
+                    {/* 왼쪽 구분 바 — 혁=레드, 현=골드 */}
+                    <div className={`mt-1 w-[2px] h-4 shrink-0 ${msg.side === 'left' ? 'bg-[#E4002B]/60' : 'bg-[#C89B3C]/50'}`} />
+
+                    {/* 발신자 태그 */}
+                    <span className={`text-[10px] font-black shrink-0 mt-0.5 w-6 ${msg.side === 'left' ? 'text-[#E4002B]/80' : 'text-[#C89B3C]/70'}`}>
                       {msg.sender}
                     </span>
 
-                    {/* 버블 */}
-                    <div className={`max-w-[82%] px-4 py-3 text-[13px] leading-relaxed break-keep tracking-tight ${
-                      msg.side === 'right'
-                        ? 'bg-[#E4002B]/10 border border-[#E4002B]/25 text-white/80 rounded-2xl rounded-tr-none'
-                        : 'bg-white/[0.04] border border-white/8 text-white/55 rounded-2xl rounded-tl-none'
-                    }`}>
+                    {/* 구분자 */}
+                    <span className="text-white/10 text-[10px] mt-0.5 shrink-0">│</span>
+
+                    {/* 텍스트 */}
+                    <p className={`text-[13px] leading-relaxed break-keep tracking-tight ${msg.side === 'left' ? 'text-white/50' : 'text-white/70'} group-hover:text-white/90 transition-colors duration-200`}>
                       {msg.text}
-                    </div>
+                    </p>
                   </div>
                 ))}
               </div>
@@ -106,14 +120,13 @@ export default function MomentsPage() {
           ))}
         </div>
 
-        {/* 푸터 */}
-        <footer className="pt-32 pb-10 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-[1px] w-6 bg-white/5" />
-            <div className="w-1 h-1 bg-[#E4002B]/40 rotate-45" />
-            <div className="h-[1px] w-6 bg-white/5" />
+        {/* 푸터 — 시스템 종료 메시지 */}
+        <footer className="mt-24 pt-8 border-t border-white/5">
+          <div className="flex items-center gap-3">
+            <span className="text-[#E4002B]/40 text-[9px]">■</span>
+            <p className="text-[9px] text-white/10 tracking-[0.4em] uppercase font-black">To be continued with you.</p>
+            <span className="text-white/10 text-[9px] animate-pulse">_</span>
           </div>
-          <p className="text-[9px] text-white/10 tracking-[0.5em] uppercase italic font-black">To be continued with you.</p>
         </footer>
       </div>
     </main>
