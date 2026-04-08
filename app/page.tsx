@@ -20,7 +20,7 @@ export default function Home() {
 
         {/* ① 메인 롤 마법진 — 오른쪽, 훨씬 선명하게 */}
         <svg
-          className="absolute top-1/2 right-[-180px] -translate-y-1/2 w-[820px] h-[820px]"
+          className="absolute top-1/2 right-[-180px] -translate-y-1/2 w-[820px] h-[820px] opacity-40"
           viewBox="0 0 400 400"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ export default function Home() {
             return (
               <rect key={i} x={cx - 4} y={cy - 4} width="8" height="8"
                 transform={`rotate(45 ${cx} ${cy})`}
-                fill="#C89B3C" opacity="0.55" />
+                fill="#C89B3C" opacity="0.30" />
             );
           })}
 
@@ -93,12 +93,12 @@ export default function Home() {
             const angle = (i * 45 * Math.PI) / 180;
             const cx = 200 + Math.cos(angle) * 110;
             const cy = 200 + Math.sin(angle) * 110;
-            return <circle key={i} cx={cx} cy={cy} r="3.5" fill="#E4002B" opacity="0.50" />;
+            return <circle key={i} cx={cx} cy={cy} r="3.5" fill="#E4002B" opacity="0.25" />;
           })}
 
           {/* 중심 별 */}
-          <circle cx="200" cy="200" r="5" fill="#C89B3C" opacity="0.60" />
-          <circle cx="200" cy="200" r="2" fill="#fff" opacity="0.30" />
+          <circle cx="200" cy="200" r="5" fill="#C89B3C" opacity="0.35" />
+          <circle cx="200" cy="200" r="2" fill="#fff" opacity="0.15" />
         </svg>
 
         {/* ② 보조 마법진 — 왼쪽 상단 */}
