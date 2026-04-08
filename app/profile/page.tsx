@@ -124,76 +124,130 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* ── 타임라인 ── */}
-        <div className="mt-64 mb-32 relative">
-          <div className="flex flex-col items-center mb-24">
-            <div className="flex items-center gap-3 mb-4">
+        {/* ── 수직 연대기 ── */}
+        <div className="mt-64 mb-32">
+
+          {/* 헤더 */}
+          <div className="flex flex-col items-center mb-20">
+            <div className="flex items-center gap-3 mb-5">
               <div className="h-[1px] w-8 bg-[#E4002B]" />
               <div className="w-1.5 h-1.5 bg-[#E4002B] rotate-45" />
               <div className="h-[1px] w-8 bg-[#E4002B]" />
             </div>
-            <h3 className="text-[11px] font-black tracking-[0.6em] text-white/60 uppercase italic">
+            <h3 className="text-[11px] font-black tracking-[0.6em] text-white/50 uppercase italic">
               The Chronicle of Origin
             </h3>
+            {/* 컬럼 레이블 */}
+            <div className="flex justify-between w-full max-w-3xl mt-10 px-6">
+              <span className="text-[9px] font-black tracking-[0.4em] text-[#E4002B] uppercase">상 혁</span>
+              <span className="text-[9px] font-black tracking-[0.4em] text-white/25 uppercase">유 현</span>
+            </div>
           </div>
 
-          <div className="relative max-w-2xl mx-auto px-6">
-            <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-[#E4002B] via-white/10 to-transparent transform -translate-x-1/2" />
+          {/* 연대기 아이템들 */}
+          <div className="max-w-3xl mx-auto px-6 space-y-0">
 
-            <div className="space-y-32">
-              {/* 1996 */}
-              <div className="relative flex items-center justify-between">
-                <div className="w-[42%] text-right group">
-                  <span className="text-[11px] font-black text-[#E4002B] tracking-widest">1996</span>
-                  <p className="text-white text-[15px] font-bold mt-1">서울, 이상혁 출생</p>
-                  <div className="h-[1px] w-0 group-hover:w-full bg-[#E4002B]/30 transition-all duration-500 ml-auto mt-2" />
-                </div>
-                <div className="z-10 w-2.5 h-2.5 bg-[#E4002B] rounded-full shadow-[0_0_10px_#E4002B]" />
-                <div className="w-[42%]" />
-              </div>
+            {[
+              {
+                year: "1996",
+                sanghyeok: { text: "서울, 이상혁 출생", sub: null, highlight: false },
+                yuhyeon: null,
+              },
+              {
+                year: "2004",
+                sanghyeok: null,
+                yuhyeon: { text: "인천, 이유현 출생", sub: null, highlight: false },
+              },
+              {
+                year: "2013",
+                sanghyeok: { text: "프로게이머 데뷔", sub: "롤드컵 1회 우승", highlight: true },
+                yuhyeon: null,
+              },
+              {
+                year: "2015",
+                sanghyeok: { text: "롤드컵 2회 우승", sub: "LCK 스프링·서머 석권", highlight: true },
+                yuhyeon: null,
+              },
+              {
+                year: "2016",
+                sanghyeok: { text: "롤드컵 3회 우승", sub: "MSI 우승 — 역대 최다 타이틀", highlight: true },
+                yuhyeon: null,
+              },
+              {
+                year: "2023",
+                sanghyeok: { text: "롤드컵 4회 우승", sub: "전설의 전당 초대 헌액", highlight: true },
+                yuhyeon: { text: "가장 힘든 계절", sub: null, highlight: false, dim: true },
+              },
+              {
+                year: "2024",
+                sanghyeok: { text: "롤드컵 5회 우승", sub: "결승 MVP", highlight: true },
+                yuhyeon: { text: "인공지능공학과 입학", sub: "서예를 시작하다", highlight: false },
+              },
+              {
+                year: "2025",
+                sanghyeok: { text: "월즈 쓰리핏 달성", sub: "6회 우승 · 청룡장 수훈", highlight: true, goat: true },
+                yuhyeon: null,
+              },
+            ].map((item, idx) => (
+              <div key={idx} className="relative">
+                {/* 연도 — 중앙 크게 */}
+                <div className="flex flex-col items-center py-10 relative">
+                  {/* 수직 연결선 */}
+                  {idx !== 0 && (
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-10 bg-gradient-to-b from-white/5 to-white/10" />
+                  )}
 
-              {/* 2004 */}
-              <div className="relative flex items-center justify-between">
-                <div className="w-[42%]" />
-                <div className="z-10 w-2.5 h-2.5 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
-                <div className="w-[42%] text-left group">
-                  <span className="text-[11px] font-black text-white/30 tracking-widest">2004</span>
-                  <p className="text-white text-[15px] font-bold mt-1">인천, 이유현 출생</p>
-                  <div className="h-[1px] w-0 group-hover:w-full bg-white/20 transition-all duration-500 mt-2" />
-                </div>
-              </div>
+                  {/* 연도 텍스트 */}
+                  <div className="relative z-10 flex items-center gap-6 w-full">
+                    {/* 상혁 (왼쪽) */}
+                    <div className="flex-1 text-right pr-8">
+                      {item.sanghyeok ? (
+                        <div className={`inline-block text-left border-l-2 pl-4 py-2 ${item.sanghyeok.goat ? 'border-[#E4002B]' : item.sanghyeok.highlight ? 'border-[#E4002B]/50' : 'border-white/10'}`}>
+                          <p className={`text-[14px] font-black leading-tight ${item.sanghyeok.goat ? 'text-[#E4002B]' : 'text-white'}`}>
+                            {item.sanghyeok.text}
+                          </p>
+                          {item.sanghyeok.sub && (
+                            <p className="text-[10px] text-white/30 font-bold tracking-wider mt-1">{item.sanghyeok.sub}</p>
+                          )}
+                          {item.sanghyeok.goat && (
+                            <p className="text-[9px] text-[#C89B3C]/70 font-black tracking-[0.3em] uppercase mt-1">The Greatest of All Time</p>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="h-2" />
+                      )}
+                    </div>
 
-              {/* 2013 */}
-              <div className="relative flex items-center justify-between">
-                <div className="w-[42%] text-right">
-                  <span className="text-[11px] font-black text-[#E4002B] tracking-widest">2013</span>
-                  <p className="text-white text-[14px] font-medium mt-1">이상혁 프로게이머 데뷔</p>
-                </div>
-                <div className="z-10 w-2 h-2 bg-[#E4002B] rounded-full" />
-                <div className="w-[42%]" />
-              </div>
+                    {/* 연도 중앙 */}
+                    <div className="flex flex-col items-center shrink-0">
+                      <div className={`w-2 h-2 rotate-45 mb-2 ${item.sanghyeok?.highlight || item.yuhyeon ? 'bg-[#E4002B]' : 'bg-white/20'}`} />
+                      <span className={`text-[22px] font-black tracking-tighter tabular-nums ${item.sanghyeok?.goat ? 'text-[#E4002B]' : item.sanghyeok?.highlight ? 'text-white' : 'text-white/40'}`}>
+                        {item.year}
+                      </span>
+                    </div>
 
-              {/* 2024 */}
-              <div className="relative flex items-center justify-between">
-                <div className="w-[42%]" />
-                <div className="z-10 w-2 h-2 bg-white/60 rounded-full" />
-                <div className="w-[42%] text-left">
-                  <span className="text-[11px] font-black text-white/30 tracking-widest">2024</span>
-                  <p className="text-white text-[14px] font-medium mt-1">이유현 인공지능공학과 입학</p>
-                </div>
-              </div>
+                    {/* 유현 (오른쪽) */}
+                    <div className="flex-1 pl-8">
+                      {item.yuhyeon ? (
+                        <div className={`inline-block border-l-2 pl-4 py-2 ${(item.yuhyeon as any).dim ? 'border-white/10' : 'border-white/20'}`}>
+                          <p className={`text-[14px] font-black leading-tight ${(item.yuhyeon as any).dim ? 'text-white/30 italic' : 'text-white/80'}`}>
+                            {item.yuhyeon.text}
+                          </p>
+                          {item.yuhyeon.sub && (
+                            <p className="text-[10px] text-white/25 font-bold tracking-wider mt-1">{item.yuhyeon.sub}</p>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="h-2" />
+                      )}
+                    </div>
+                  </div>
 
-              {/* 2025 */}
-              <div className="relative flex items-center justify-between">
-                <div className="w-[42%] text-right">
-                  <span className="text-[11px] font-black text-[#E4002B] tracking-widest">2025</span>
-                  <p className="text-[#E4002B] text-[17px] font-black mt-1 leading-tight">이상혁 월즈 쓰리핏 달성</p>
-                  <p className="text-[9px] text-white/20 mt-1 font-black tracking-[0.3em] uppercase">The Greatest of All Time</p>
+                  {/* 하단 구분선 */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/4" />
                 </div>
-                <div className="z-10 w-4 h-4 bg-[#E4002B] rounded-full ring-4 ring-[#E4002B]/20 shadow-[0_0_20px_rgba(228,0,43,0.6)]" />
-                <div className="w-[42%]" />
               </div>
-            </div>
+            ))}
           </div>
         </div>
 
