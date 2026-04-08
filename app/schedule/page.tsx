@@ -46,10 +46,6 @@ const EVENTS: Record<string, {
     { type: 'exam', label: '시험기간' },
     { type: 'homeground', label: 'T1 vs BRO', sub: 'HOME GROUND', venue: 'Inspire Arena' },
   ],
-  '2026-04-26': [
-    { type: 'exam', label: '시험기간 마지막 날' },
-    { type: 'homeground', label: 'T1 vs BFX', sub: 'HOME GROUND', venue: 'Inspire Arena' },
-  ],
 };
 
 const TYPE_STYLE = {
