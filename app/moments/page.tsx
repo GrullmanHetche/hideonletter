@@ -3,38 +3,24 @@ import Link from 'next/link';
 
 const dialogues = [
   {
-    date: "2026.04.04",
+    date: "2026.04.11",
     messages: [
-      { side: "left", sender: "혁", text: "안녕하세요. 점심 식사는 하셨습니까?" },
-      { side: "right", sender: "현", text: "저는 아직입니다. 🧟‍♀️" },
-      { side: "right", sender: "현", text: "이커 씨는... 이커 씨? 티원 페 씨." },
-      { side: "left", sender: "혁", text: "편하게 부르셔도 됩니다. 이름으로 부르시거나, 이커 라는 호칭도 부르기 편하겠군요." }
-    ]
-  },
-  {
-    date: "2026.04.05",
-    messages: [
-      { side: "right", sender: "현", text: "(링크) << 이 수상한 링크를 클릭해 보세요. . ." },
-      { side: "left", sender: "혁", text: "카메라입니까? 저에게 주시는 선물인가요...?" },
-      { side: "right", sender: "현", text: "그렇습니다. 벚꽃을 예쁘게 한 컷 담아 주시면 더 좋을 것 같네요. ₍ᐢɞ̴̶̷.̮ɞ̴̶̷ᐢ₎" }
-    ]
-  },
-  {
-    date: "2026.04.06",
-    messages: [
-      { side: "left", sender: "혁", text: "과음하셨습니까? 시간이 좀 흘렀는데 지금은 좀 어떠신지요. 물을 많이 드시고 푹 쉬시길 바랍니다." },
-      { side: "right", sender: "현", text: "아이고 두야..." },
-      { side: "left", sender: "혁", text: "숙취가 심하신가요. 꿀물이나 초코우유를 마시면 도움이 될 거라 생각합니다... 추가로 선물해 주신 카메라를 배송시켰습니다. 이걸로 세상의 멋진 부분을 담아낼 수 있으면 좋겠습니다. 감사합니다." }
-    ]
-  },
-  {
-    date: "2026.04.07",
-    messages: [
-      { side: "right", sender: "현", text: "이커 씨는 무슨 계절을 제일 좋아하세요?" },
-      { side: "left", sender: "혁", text: "저는 겨울이 좋습니다. 시즌이 마무리되는 시기이기도 하고, 월드 챔피언십도 그때 시작되기 때문입니다. 가장 중요한 계절이라고 할 수 있습니다." },
-      { side: "right", sender: "현", text: "헉, 저도요. 진짜 워커 홀릭이시구나." },
-      { side: "right", sender: "현", text: "저는 그냥... 눈이 좋고, 생일이 좋아서 겨울을 좋아해요." },
-      { side: "left", sender: "혁", text: "12월 17일이 생일이셨으니, 그쯤이면 한겨울이군요. 운이 좋다면 생일에 눈도 볼 수 있으시겠네요. 부럽군요." }
+      { side: "right", sender: "현", text: "(사진) 펭... 이커."},
+      { side: "left", sender: "혁", text: "귀엽네요." },
+      { side: "left", sender: "혁", text: "유현 씨도 동물을 하나 정하면 좋을 것 같은데요." },
+      { side: "left", sender: "혁", text: "그럼 제가 부를 수 있을 것 같습니다." },
+      { side: "left", sender: "혁", text: "생각할 수도 있고요." },
+      { side: "right", sender: "현", text: "원숭이? 어떠신가요." },
+      { side: "left", sender: "혁", text: "이유가 있나요? 특이한데요." },
+      { side: "right", sender: "현", text: "별다른 이유는 없구... 원숭이 띠예요." },
+      { side: "left", sender: "혁", text: "아아." },
+      { side: "right", sender: "현", text: "아니면 너구리." },
+      { side: "left", sender: "혁", text: "그럼 전 쥐로 했어도 됐네요." },
+      { side: "left", sender: "혁", text: "너구리는 닮아서인가요?" },
+      { side: "right", sender: "현", text: "고등학교 때 별명이 너구리였습니다. 너굴현. ₍ᐢɞ̴̶̷.̮ɞ̴̶̷ᐢ₎" },
+      { side: "left", sender: "혁", text: "귀여우니까 너구리로 하죠." },
+      { side: "right", sender: "현", text: "근데 이커 씨… 이커 씨? 티원 페 씨. 암튼 이커 씨는 고양이 아닌가요." },
+      { side: "left", sender: "혁", text: "그냥 상혁 씨라고 해도 되는데요." }
     ]
   }
 ];
