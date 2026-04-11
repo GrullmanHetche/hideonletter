@@ -5,25 +5,25 @@ import { useState } from 'react'
 
 // 가방 쏟은 느낌 — 각 아이템마다 크기/위치/기울기 고정값
 const yhItems = [
-  { img: "/yhmacbook.png", name: "맥북",         desc: "항상 켜져 있음. 탭 47개.",          w: 200, top: 40,  left: 30,  rotate: -6  },
-  { img: "/yhheadset.png", name: "헤드셋",        desc: "혼자 있고 싶을 때 필수템.",          w: 140, top: 20,  left: 210, rotate: 8   },
-  { img: "/yhmedicine.png",name: "진통제",        desc: "두통이 잦아서 항상 챙김.",           w: 110, top: 10,  left: 360, rotate: -12 },
-  { img: "/yhtumbler.png", name: "텀블러",        desc: "따뜻한 물만 마심.",                 w: 90,  top: 180, left: 20,  rotate: 5   },
-  { img: "/yhcamera.png",  name: "핑크 디카",      desc: "상혁 씨가 보내준 카메라.",           w: 140, top: 160, left: 140, rotate: -4  },
-  { img: "/yhperfume.png", name: "향수",          desc: "은은한 플로럴 계열.",               w: 100, top: 150, left: 310, rotate: 10  },
-  { img: "/yhpouch.png",   name: "메이크업 파우치", desc: "꼭 필요한 것들만.",                 w: 160, top: 310, left: 10,  rotate: -8  },
-  { img: "/yhnotebook.png",name: "공책",          desc: "매일 뭔가를 적어둠.",               w: 110, top: 290, left: 200, rotate: 6   },
-  { img: "/yhscrunch.png", name: "스크런치",       desc: "머리 묶을 때.",                    w: 100, top: 300, left: 330, rotate: -5  },
-  { img: "/yhpowder.png",  name: "파우더",         desc: "외출 전 마지막 단계.",              w: 100, top: 420, left: 120, rotate: 9   },
+  { img: "/yhmacbook.png", name: "맥북",         desc: "항상 켜져 있음. 탭 47개.",     w: 240, top: 30,  left: 20,  rotate: -6  },
+  { img: "/yhheadset.png", name: "헤드셋",        desc: "혼자 있고 싶을 때 필수템.",    w: 170, top: 10,  left: 240, rotate: 8   },
+  { img: "/yhmedicine.png",name: "진통제",        desc: "두통이 잦아서 항상 챙김.",     w: 120, top: 5,   left: 400, rotate: -12 },
+  { img: "/yhtumbler.png", name: "텀블러",        desc: "따뜻한 물만 마심.",            w: 150, top: 190, left: 10,  rotate: 5   },
+  { img: "/yhcamera.png",  name: "핑크 디카",      desc: "상혁 씨가 보내준 카메라.",     w: 160, top: 165, left: 180, rotate: -4  },
+  { img: "/yhperfume.png", name: "향수",          desc: "은은한 플로럴 계열.",          w: 130, top: 145, left: 360, rotate: 10  },
+  { img: "/yhpouch.png",   name: "메이크업 파우치", desc: "꼭 필요한 것들만.",            w: 190, top: 330, left: 5,   rotate: -8  },
+  { img: "/yhnotebook.png",name: "공책",          desc: "매일 뭔가를 적어둠.",          w: 130, top: 310, left: 230, rotate: 6   },
+  { img: "/yhscrunch.png", name: "스크런치",       desc: "머리 묶을 때.",               w: 140, top: 305, left: 370, rotate: -5  },
+  { img: "/yhpowder.png",  name: "파우더",         desc: "외출 전 마지막 단계.",         w: 120, top: 460, left: 150, rotate: 9   },
 ];
 
 const shItems = [
-  { img: "/shbook.png",        name: "책",        desc: "서예실에서 빌려준 그 책.",     w: 170, top: 30,  left: 40,  rotate: -7  },
-  { img: "/shcharger.png",     name: "충전기",     desc: "항상 두 개씩 챙김.",          w: 150, top: 20,  left: 230, rotate: 5   },
-  { img: "/shglasses.png",     name: "안경집",     desc: "예비 안경 포함.",             w: 140, top: 15,  left: 390, rotate: -10 },
-  { img: "/shnivea.png",       name: "니베아 립밤", desc: "오래된 습관.",               w: 110, top: 210, left: 20,  rotate: 8   },
-  { img: "/shtoothbrush.png",  name: "칫솔",       desc: "칫솔 세트 中 1.",            w: 80,  top: 190, left: 190, rotate: -14 },
-  { img: "/shtoothpaste.png",  name: "치약",       desc: "칫솔 세트 中 2.",            w: 130, top: 200, left: 290, rotate: 6   },
+  { img: "/shbook.png",        name: "공책",        desc: "무언가를 기록할 수도 있으니까.",  w: 220, top: 20,  left: 20,  rotate: -7  },
+  { img: "/shcharger.png",     name: "충전기",     desc: "항상 두 개씩 챙김.",       w: 200, top: 10,  left: 250, rotate: 5   },
+  { img: "/shglasses.png",     name: "안경집",     desc: "예비 안경 포함.",          w: 180, top: 5,   left: 430, rotate: -10 },
+  { img: "/shnivea.png",       name: "니베아 립밤", desc: "오래된 습관.",            w: 150, top: 250, left: 15,  rotate: 8   },
+  { img: "/shtoothbrush.png",  name: "칫솔",       desc: "칫솔 세트 中 1.",         w: 120, top: 235, left: 240, rotate: -14 },
+  { img: "/shtoothpaste.png",  name: "치약",       desc: "칫솔 세트 中 2.",         w: 190, top: 240, left: 360, rotate: 6   },
 ];
 
 function BagModal({ items, name, color, onClose }: {
