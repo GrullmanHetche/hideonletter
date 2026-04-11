@@ -34,10 +34,13 @@ const EVENTS: Record<string, {
     { type: 'match', label: 'KRX vs T1', sub: 'LCK 정규시즌', venue: 'LoL Park' },
   ],
   // ─ 시험기간 (20~26)
-  '2026-04-20': [{ type: 'exam', label: '시험기간 시작' }],
+  '2026-04-20': [{ type: 'exam', label: '선형대수', sub: '시험기간 시작' }],
   '2026-04-21': [{ type: 'exam', label: '시험기간' }],
-  '2026-04-22': [{ type: 'exam', label: '시험기간' }],
-  '2026-04-23': [{ type: 'exam', label: '시험기간' }],
+  '2026-04-22': [
+    { type: 'exam', label: '통계학', sub: '시험기간' },
+    { type: 'exam', label: '현대시 읽기', sub: '시험기간' },
+  ],
+  '2026-04-23': [{ type: 'exam', label: '자료구조', sub: '시험기간' }],
   '2026-04-24': [
     { type: 'exam', label: '시험기간' },
     { type: 'homeground', label: 'T1 HOME GROUND DAY 1', sub: 'Inspire Arena', venue: 'Inspire Arena' },
@@ -45,6 +48,14 @@ const EVENTS: Record<string, {
   '2026-04-25': [
     { type: 'exam', label: '시험기간' },
     { type: 'homeground', label: 'T1 vs BRO', sub: 'HOME GROUND', venue: 'Inspire Arena' },
+  ],
+  '2026-04-26': [
+    { type: 'exam', label: '시험기간 마지막 날' },
+    { type: 'homeground', label: 'T1 vs BFX', sub: 'HOME GROUND', venue: 'Inspire Arena' },
+  ],
+  '2026-04-26': [
+    { type: 'exam', label: '시험기간 마지막 날' },
+    { type: 'homeground', label: 'T1 vs BFX', sub: 'HOME GROUND', venue: 'Inspire Arena' },
   ],
 };
 
