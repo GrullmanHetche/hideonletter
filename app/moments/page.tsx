@@ -22,6 +22,34 @@ const dialogues = [
       { side: "right", sender: "현", text: "근데 이커 씨… 이커 씨? 티원 페 씨. 암튼 이커 씨는 고양이 아닌가요." },
       { side: "left", sender: "혁", text: "그냥 상혁 씨라고 해도 되는데요." }
     ]
+  },
+  {
+    date: "2026.04.11",
+    message: [
+      { side: "left", sender: "혁", text: "우리혁이라는 말이 제일 좋습니다." },
+      { side: "right", sender: "현", text: "마이혁. ₍ᐢɞ̴̶̷.̮ɞ̴̶̷ᐢ₎."},
+      { side: "right", sender: "현", text: "저는 사석에서 마이혁이라는 단어를 꽤 즐겨 쓰는 편인데요. 어느 날 친구가 그럼 경기 지면 유어혁이냐고 물은 적이 있습니다."},
+      { side: "right", sender: "현", text: "그래서… 너무 큰 실수를 했다면 솔직히 한 20분 정도는 유어혁으로 부른다고 대답해 줬습니다…"},
+      { side: "left", sender: "혁", text: "아......" },
+      { side: "left", sender: "혁", text: "유어혁......" },
+      { side: "left", sender: "혁", text: "조금 슬픈 단어네요." },
+      { side: "right", sender: "현", text: "......"},
+      { side: "right", sender: "현", text: "그래도 대부분의 시간은 마이혁이라고 부릅니다… 허락은 안 받았지만요."},
+      { side: "left", sender: "혁", text: "괜찮습니다. 마이혁도 꽤 자주 나와요." },
+      { side: "right", sender: "현", text: "흠. 그러면 저는 NVRAM혁이라고 부르겠습니다."},
+      { side: "left", sender: "혁", text: "...무슨 의미인가요?" },
+      { side: "right", sender: "현", text: "비밀입니다."},
+      { side: "left", sender: "혁", text: "뭔가 컴퓨터에서 엄청 중요한 것 같습니다." },
+      { side: "right", sender: "현", text: "NVRAM은 비휘발성 메모리인데 속도도 빠른 친구예요."},
+      { side: "left", sender: "혁", text: "모스부호인가요?" },
+      { side: "right", sender: "현", text: "음..."},
+      { side: "right", sender: "현", text: "보통 사람들은 머릿속에서 금방 잊히는 일반 램 같은 존재지만, 이커 씨는 엔브이램처럼 제가 잠시 셧다운 되더라도 다시 눈을 떴을 때 기억나는 존재라는 뜻이에요."},
+      { side: "right", sender: "현", text: "컴퓨터의 날짜, 시간, 부팅 순서를 정하는 데가 엔브이램… 이거든요. 그런데 막상 말하고 보니까 그게 뭔데, **아 << 이거 같네."},
+      { side: "left", sender: "혁", text: "아, 이해했습니다." },
+      { side: "left", sender: "혁", text: "감사합니다." },
+      { side: "left", sender: "혁", text: "좋은데요. 그런 존재라면......되고 싶습니다." },
+      { side: "right", sender: "현", text: "조금 부끄럽네요. 숨겠습니다."}
+    ]
   }
 ];
 
