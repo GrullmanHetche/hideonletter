@@ -25,7 +25,7 @@ const dialogues = [
   },
   {
     date: "2026.04.11",
-    message: [
+    messages: [
       { side: "left", sender: "혁", text: "우리혁이라는 말이 제일 좋습니다." },
       { side: "right", sender: "현", text: "마이혁. ₍ᐢɞ̴̶̷.̮ɞ̴̶̷ᐢ₎."},
       { side: "right", sender: "현", text: "저는 사석에서 마이혁이라는 단어를 꽤 즐겨 쓰는 편인데요. 어느 날 친구가 그럼 경기 지면 유어혁이냐고 물은 적이 있습니다."},
