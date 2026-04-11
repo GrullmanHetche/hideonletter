@@ -3,103 +3,115 @@
 import Link from 'next/link'
 import { useState } from 'react'
 
+// 가방 쏟은 느낌 — 각 아이템마다 크기/위치/기울기 고정값
 const yhItems = [
-  { img: "/yhnotebook.png",  name: "맥북",           desc: "항상 켜져 있음. 탭 47개." },
-  { img: "/yhheadset.png",   name: "헤드셋",          desc: "혼자 있고 싶을 때 필수템." },
-  { img: "/yhmedicine.png",  name: "진통제",          desc: "두통이 잦아서 항상 챙김." },
-  { img: "/yhtumbler.png",   name: "텀블러",          desc: "따뜻한 물만 마심." },
-  { img: "/yhcamera.png",    name: "핑크 디카",        desc: "세상의 예쁜 부분을 담는 카메라." },
-  { img: "/yhperfume.png",   name: "향수",            desc: "은은한 플로럴 계열." },
-  { img: "/yhpouch.png",     name: "메이크업 파우치",   desc: "꼭 필요한 것들만." },
-  { img: "/yhscrunch.png",   name: "스크런치",         desc: "머리 묶을 때 쓰는 것." },
-  { img: "/yhpowder.png",    name: "파우더",           desc: "외출 전 마지막 단계." },
+  { img: "/yhmacbook.png", name: "맥북",         desc: "항상 켜져 있음. 탭 47개.",          w: 200, top: 40,  left: 30,  rotate: -6  },
+  { img: "/yhheadset.png", name: "헤드셋",        desc: "혼자 있고 싶을 때 필수템.",          w: 140, top: 20,  left: 210, rotate: 8   },
+  { img: "/yhmedicine.png",name: "진통제",        desc: "두통이 잦아서 항상 챙김.",           w: 110, top: 10,  left: 360, rotate: -12 },
+  { img: "/yhtumbler.png", name: "텀블러",        desc: "따뜻한 물만 마심.",                 w: 90,  top: 180, left: 20,  rotate: 5   },
+  { img: "/yhcamera.png",  name: "핑크 디카",      desc: "상혁 씨가 보내준 카메라.",           w: 140, top: 160, left: 140, rotate: -4  },
+  { img: "/yhperfume.png", name: "향수",          desc: "은은한 플로럴 계열.",               w: 100, top: 150, left: 310, rotate: 10  },
+  { img: "/yhpouch.png",   name: "메이크업 파우치", desc: "꼭 필요한 것들만.",                 w: 160, top: 310, left: 10,  rotate: -8  },
+  { img: "/yhnotebook.png",name: "공책",          desc: "매일 뭔가를 적어둠.",               w: 110, top: 290, left: 200, rotate: 6   },
+  { img: "/yhscrunch.png", name: "스크런치",       desc: "머리 묶을 때.",                    w: 100, top: 300, left: 330, rotate: -5  },
+  { img: "/yhpowder.png",  name: "파우더",         desc: "외출 전 마지막 단계.",              w: 100, top: 420, left: 120, rotate: 9   },
 ];
 
 const shItems = [
-  { img: "/shbook.png",       name: "책",      desc: "서예실에서 빌려준 그 책." },
-  { img: "/shcharger.png",    name: "충전기",   desc: "항상 두 개씩 챙김." },
-  { img: "/shglasses.png",    name: "안경집",   desc: "예비 안경 포함." },
-  { img: "/shnivea.png",      name: "니베아 립밤", desc: "오래된 습관." },
-  { img: "/shtoothbrush.png", name: "칫솔",    desc: "칫솔 세트 中 1." },
-  { img: "/shtoothpaste.png", name: "치약",    desc: "칫솔 세트 中 2." },
+  { img: "/shbook.png",        name: "책",        desc: "서예실에서 빌려준 그 책.",     w: 170, top: 30,  left: 40,  rotate: -7  },
+  { img: "/shcharger.png",     name: "충전기",     desc: "항상 두 개씩 챙김.",          w: 150, top: 20,  left: 230, rotate: 5   },
+  { img: "/shglasses.png",     name: "안경집",     desc: "예비 안경 포함.",             w: 140, top: 15,  left: 390, rotate: -10 },
+  { img: "/shnivea.png",       name: "니베아 립밤", desc: "오래된 습관.",               w: 110, top: 210, left: 20,  rotate: 8   },
+  { img: "/shtoothbrush.png",  name: "칫솔",       desc: "칫솔 세트 中 1.",            w: 80,  top: 190, left: 190, rotate: -14 },
+  { img: "/shtoothpaste.png",  name: "치약",       desc: "칫솔 세트 中 2.",            w: 130, top: 200, left: 290, rotate: 6   },
 ];
 
-function BagModal({ items, name, onClose }: {
+function BagModal({ items, name, color, onClose }: {
   items: typeof yhItems;
   name: string;
+  color: 'pink' | 'red';
   onClose: () => void;
 }) {
   const [hovered, setHovered] = useState<number | null>(null);
+  const accentColor = color === 'pink' ? '#f9a8c9' : '#E4002B';
+
+  // 캔버스 높이 자동 계산
+  const canvasH = Math.max(...items.map(it => it.top + it.w)) + 60;
 
   return (
-    <div className="fixed inset-0 bg-[#030303]/95 z-[100] flex items-center justify-center p-6 backdrop-blur-sm">
-      {/* 상단 레드 라인 */}
-      <div className="absolute top-0 left-0 w-full h-[2px] bg-[#E4002B]" />
+    <div className="fixed inset-0 bg-[#030303]/96 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
+      <div className="absolute top-0 left-0 w-full h-[2px]" style={{ background: accentColor }} />
 
-      <div className="max-w-lg w-full relative">
+      <div className="max-w-2xl w-full relative border border-white/5 bg-[#080808]">
         {/* 코너 장식 */}
-        <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#E4002B]" />
-        <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#E4002B]" />
-        <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-[#E4002B]/40" />
-        <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[#E4002B]/40" />
+        <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2" style={{ borderColor: accentColor }} />
+        <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2" style={{ borderColor: accentColor }} />
+        <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2" style={{ borderColor: accentColor + '60' }} />
+        <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2" style={{ borderColor: accentColor + '60' }} />
 
-        <div className="border border-white/5 bg-[#080808] px-8 py-10">
+        <div className="px-8 pt-8 pb-6">
           {/* 헤더 */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-start justify-between mb-8">
             <div>
-              <p className="text-[9px] text-[#E4002B] tracking-[0.5em] uppercase font-black mb-1">What's in my bag</p>
-              <h3 className="text-xl font-black text-white tracking-tighter">{name}의 가방</h3>
+              <p className="text-[9px] tracking-[0.5em] uppercase font-black mb-1" style={{ color: accentColor }}>
+                What's in my bag
+              </p>
+              <h3 className="text-2xl font-black text-white tracking-tighter">{name}의 가방</h3>
             </div>
             <button
               onClick={onClose}
-              className="text-white/20 hover:text-white text-[9px] tracking-[0.4em] uppercase font-black transition-colors"
+              className="text-white/20 hover:text-white text-[9px] tracking-[0.4em] uppercase font-black transition-colors mt-1"
             >
               [ EXIT ]
             </button>
           </div>
 
-          {/* 아이템 그리드 */}
-          <div className="grid grid-cols-3 gap-3">
+          {/* 가방 쏟은 캔버스 */}
+          <div
+            className="relative w-full overflow-hidden"
+            style={{ height: canvasH }}
+          >
             {items.map((item, i) => (
               <div
                 key={i}
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
-                className="relative group cursor-default"
+                className="absolute cursor-default transition-all duration-200"
+                style={{
+                  top: item.top,
+                  left: item.left,
+                  width: item.w,
+                  transform: `rotate(${item.rotate}deg) scale(${hovered === i ? 1.12 : 1})`,
+                  zIndex: hovered === i ? 20 : i,
+                  filter: hovered === i
+                    ? `drop-shadow(0 0 16px ${accentColor}60)`
+                    : 'none',
+                  transformOrigin: 'center center',
+                }}
               >
-                {/* 아이템 박스 */}
-                <div className={`aspect-square border transition-all duration-200 flex items-center justify-center p-3
-                  ${hovered === i ? 'border-[#E4002B]/50 bg-[#E4002B]/5' : 'border-white/8 bg-white/[0.02]'}`}>
-                  <img
-                    src={item.img}
-                    alt={item.name}
-                    className={`w-full h-full object-contain transition-all duration-200 ${hovered === i ? 'scale-110' : 'scale-100'}`}
-                  />
-                  {/* 호버 인디케이터 */}
-                  {hovered === i && (
-                    <div className="absolute top-0 left-0 w-full h-[2px] bg-[#E4002B]" />
-                  )}
-                </div>
-
-                {/* 아이템 이름 */}
-                <p className={`text-[9px] font-black tracking-wider mt-2 text-center transition-colors
-                  ${hovered === i ? 'text-white' : 'text-white/30'}`}>
-                  {item.name}
-                </p>
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  style={{ width: item.w, height: item.w, objectFit: 'contain' }}
+                />
               </div>
             ))}
           </div>
 
-          {/* 호버된 아이템 설명 */}
-          <div className="mt-6 h-8 flex items-center">
+          {/* 호버 설명 */}
+          <div className="mt-4 h-7 flex items-center border-t border-white/5 pt-4">
             {hovered !== null ? (
-              <p className="text-[11px] text-white/40 font-light italic animate-in fade-in duration-200">
-                <span className="text-[#E4002B]/70 font-black not-italic">{items[hovered].name}</span>
+              <p className="text-[11px] text-white/40 font-light italic animate-in fade-in duration-150">
+                <span className="font-black not-italic" style={{ color: accentColor }}>
+                  {items[hovered].name}
+                </span>
                 {" — "}
                 {items[hovered].desc}
               </p>
             ) : (
-              <p className="text-[9px] text-white/10 tracking-widest uppercase">아이템에 마우스를 올려보세요</p>
+              <p className="text-[9px] text-white/10 tracking-widest uppercase">
+                아이템에 마우스를 올려보세요
+              </p>
             )}
           </div>
         </div>
@@ -141,16 +153,14 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-[#030303] py-24 px-6 text-[#ffffff] font-sans selection:bg-[#E4002B]/30">
-
-      {/* 상단 레드 라인 */}
       <div className="fixed top-0 left-0 w-full h-[2px] bg-[#E4002B] z-50" />
 
       {/* 왓츠인마백 모달 */}
       {bagOpen === 'yh' && (
-        <BagModal items={yhItems} name="유현" onClose={() => setBagOpen(null)} />
+        <BagModal items={yhItems} name="유현" color="pink" onClose={() => setBagOpen(null)} />
       )}
       {bagOpen === 'sh' && (
-        <BagModal items={shItems} name="상혁" onClose={() => setBagOpen(null)} />
+        <BagModal items={shItems} name="상혁" color="red" onClose={() => setBagOpen(null)} />
       )}
 
       <div className="max-w-5xl mx-auto">
@@ -167,10 +177,9 @@ export default function ProfilePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-24 relative">
-          {/* 중앙 구분선 */}
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-white/5 transform -translate-x-1/2" />
 
-          {/* ── 유현 (Left) ── */}
+          {/* ── 유현 ── */}
           <div className="flex flex-col space-y-12">
             <div className="flex flex-col items-center md:items-start gap-8">
               <div className="w-56 h-56 flex items-center justify-center relative">
@@ -184,7 +193,6 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* 스탯 */}
             <div className="space-y-5 pt-2">
               {Object.entries(yuHyun.stats).map(([key, value]) => (
                 <div key={key} className="flex flex-col space-y-1.5 text-left border-l border-white/5 pl-4 hover:border-[#E4002B]/40 transition-colors">
@@ -194,7 +202,6 @@ export default function ProfilePage() {
               ))}
             </div>
 
-            {/* 태그 */}
             <div className="flex flex-wrap gap-2 pt-2">
               {yuHyun.tags.map(tag => (
                 <span key={tag} className="px-3 py-1 bg-white/[0.03] text-white/30 text-[9px] font-black border border-white/8 uppercase tracking-wider hover:border-[#E4002B]/40 hover:text-white/60 transition-colors">
@@ -206,12 +213,12 @@ export default function ProfilePage() {
             {/* 가방 버튼 */}
             <button
               onClick={() => setBagOpen('yh')}
-              className="group flex items-center gap-3 w-fit mt-2"
+              className="group flex items-center gap-3 w-fit"
             >
               <img
                 src="/yhbag.png"
                 alt="유현 가방"
-                className="w-12 h-12 object-contain opacity-60 group-hover:opacity-100 transition-all duration-200 group-hover:scale-110"
+                className="w-12 h-12 object-contain opacity-50 group-hover:opacity-100 transition-all duration-200 group-hover:scale-110"
               />
               <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.4em] group-hover:text-[#E4002B] transition-colors">
                 What's in my bag →
@@ -219,7 +226,7 @@ export default function ProfilePage() {
             </button>
           </div>
 
-          {/* ── 상혁 (Right) ── */}
+          {/* ── 상혁 ── */}
           <div className="flex flex-col space-y-12">
             <div className="flex flex-col items-center md:items-end gap-8">
               <div className="w-56 h-56 flex items-center justify-center relative">
@@ -233,7 +240,6 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* 스탯 */}
             <div className="space-y-5 pt-2 text-right">
               {Object.entries(sangHyeok.stats).map(([key, value]) => (
                 <div key={key} className="flex flex-col space-y-1.5 items-end border-r border-white/5 pr-4 hover:border-[#E4002B]/40 transition-colors">
@@ -243,7 +249,6 @@ export default function ProfilePage() {
               ))}
             </div>
 
-            {/* 태그 */}
             <div className="flex flex-wrap gap-2 pt-2 justify-center md:justify-end">
               {sangHyeok.tags.map(tag => (
                 <span key={tag} className="px-3 py-1 bg-white/[0.03] text-white/30 text-[9px] font-black border border-white/8 uppercase tracking-wider hover:border-[#E4002B]/40 hover:text-white/60 transition-colors">
@@ -255,7 +260,7 @@ export default function ProfilePage() {
             {/* 가방 버튼 */}
             <button
               onClick={() => setBagOpen('sh')}
-              className="group flex items-center gap-3 w-fit mt-2 md:self-end"
+              className="group flex items-center gap-3 w-fit md:self-end"
             >
               <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.4em] group-hover:text-[#E4002B] transition-colors">
                 ← What's in my bag
@@ -263,7 +268,7 @@ export default function ProfilePage() {
               <img
                 src="/shbag.png"
                 alt="상혁 가방"
-                className="w-12 h-12 object-contain opacity-60 group-hover:opacity-100 transition-all duration-200 group-hover:scale-110"
+                className="w-12 h-12 object-contain opacity-50 group-hover:opacity-100 transition-all duration-200 group-hover:scale-110"
               />
             </button>
           </div>
@@ -289,12 +294,12 @@ export default function ProfilePage() {
           <div className="max-w-3xl mx-auto px-6 space-y-0">
             {[
               { year: "1996", sanghyeok: { text: "서울, 이상혁 출생", sub: null, highlight: false }, yuhyeon: null },
-              { year: "2004", sanghyeok: null, yuhyeon: { text: "인천, 이유현 출생", sub: null, highlight: false } },
+              { year: "2004", sanghyeok: null, yuhyeon: { text: "인천, 이유현 출생", sub: null, dim: false } },
               { year: "2013", sanghyeok: { text: "프로게이머 데뷔", sub: "롤드컵 1회 우승", highlight: true }, yuhyeon: null },
               { year: "2015", sanghyeok: { text: "롤드컵 2회 우승", sub: "LCK 스프링·서머 석권", highlight: true }, yuhyeon: null },
               { year: "2016", sanghyeok: { text: "롤드컵 3회 우승", sub: "MSI 우승 — 역대 최다 타이틀", highlight: true }, yuhyeon: null },
-              { year: "2023", sanghyeok: { text: "롤드컵 4회 우승", sub: "전설의 전당 초대 헌액", highlight: true }, yuhyeon: { text: "가장 힘든 계절", sub: null, highlight: false, dim: true } },
-              { year: "2024", sanghyeok: { text: "롤드컵 5회 우승", sub: "결승 MVP", highlight: true }, yuhyeon: { text: "인공지능공학과 입학", sub: "서예를 시작하다", highlight: false } },
+              { year: "2023", sanghyeok: { text: "롤드컵 4회 우승", sub: "전설의 전당 초대 헌액", highlight: true }, yuhyeon: { text: "가장 힘든 계절", sub: null, dim: true } },
+              { year: "2024", sanghyeok: { text: "롤드컵 5회 우승", sub: "결승 MVP", highlight: true }, yuhyeon: { text: "인공지능공학과 입학", sub: "서예를 시작하다", dim: false } },
               { year: "2025", sanghyeok: { text: "월즈 쓰리핏 달성", sub: "6회 우승 · 청룡장 수훈", highlight: true, goat: true }, yuhyeon: null },
             ].map((item, idx) => (
               <div key={idx} className="relative">
