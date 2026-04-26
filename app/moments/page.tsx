@@ -219,7 +219,18 @@ const dialogues = [
       { side: "right", sender: "현", text: "누나가 많은 것도 약간 귀여움 포인트." },
       { side: "left", sender: "혁", text: "그렇군요." },
       { side: "left", sender: "혁", text: "누나라......어렵네요." },
-      { side: "right", sender: "현", text: "그리고약간약간버터떡오웅이게버터떡이구나먹어볼까(안돼너살쪄갖고)이런소리를듣는다든가오늘경기어떨것같나요개바를것같습니다ㅋㅋ하고진다든가이번LCK3강체제가무너질것이라고예고하고벅뚜벅뚜2등자리로간다든가아무도안시켰는데못말리는아가씨춤을올린다든가그러나같은팀동료(전)이올린춤영상에는?라고댓글을단다든가팝에다가내가춤잘추면어떨거같애잘춤아이돌처럼(그렇지만너는프로게이머잖아…)이런걸보낸다든가…말도안되는인스타그램왕관필터를쓰고캐뤼라고주석을적는다든가..." },
+      {
+        side: "right",
+        sender: "현",
+        text:
+          "그리고 약간 약간 버터떡 오웅 이게 버터떡이구나 먹어볼까(안돼 너 살쪄갖고) 이런 소리를 듣는다든가\n" +
+          "오늘 경기 어떨 것 같나요 개바를 것 같습니다ㅋㅋ 하고 진다든가\n" +
+          "이번 LCK 3강 체제가 무너질 것이라고 예고하고 벅뚜벅뚜 2등 자리로 간다든가\n" +
+          "아무도 안 시켰는데 못말리는 아가씨 춤을 올린다든가\n" +
+          "그러나 같은 팀 동료(전)이 올린 춤 영상에는 ?라고 댓글을 단다든가\n" +
+          "팝에다가 내가 춤 잘추면 어떨거같애 잘춤 아이돌처럼(그렇지만 너는 프로게이머잖아…) 이런 걸 보낸다든가…\n" +
+          "말도 안 되는 인스타그램 왕관 필터를 쓰고 캐뤼라고 주석을 적는다든가...",
+      },
       { side: "left", sender: "혁", text: "......그건 민형이 성격 아닌가요?" },
       { side: "right", sender: "현", text: "흠…" },
       { side: "right", sender: "현", text: "저는 잘 모르겠네요." },
@@ -332,7 +343,7 @@ export default function MomentsPage() {
                       <p className="text-5xl leading-none py-1">👀</p>
                     ) : (
                       <p
-                        className={`text-[13px] leading-relaxed break-keep tracking-tight ${
+                        className={`text-[13px] leading-relaxed break-words whitespace-pre-wrap tracking-tight ${
                           msg.side === "left" ? "text-white/50" : "text-white/70"
                         } group-hover:text-white/90 transition-colors duration-200`}
                       >
