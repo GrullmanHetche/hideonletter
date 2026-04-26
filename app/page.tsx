@@ -256,8 +256,8 @@ export default function Home() {
               <div className="space-y-8 py-10 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                 <div className="h-[2px] w-10 bg-[#E4002B]" />
                 <div className="text-[14px] leading-loose text-white/60 font-light break-keep">
-                  "오늘 경기 때문에 많이 속상하죠? <br /><br />
-                  무슨 결과가 있더라도 이커 씨는 저에게 영원한 마이혁이에요. "
+                  "홈그 너무 재미있었다! <br /><br />
+                  갔는지 안 갔는지는 비밀. 제 최애 파트는 앞구르기*3 페이커입니다. "
                 </div>
                 <div className="text-right pt-8">
                   <p className="text-[9px] text-white/20 tracking-[0.3em] italic uppercase">— Logged by Yu-Hyun —</p>
