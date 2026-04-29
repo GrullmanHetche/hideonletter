@@ -256,8 +256,8 @@ export default function Home() {
               <div className="space-y-8 py-10 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                 <div className="h-[2px] w-10 bg-[#E4002B]" />
                 <div className="text-[14px] leading-loose text-white/60 font-light break-keep">
-                  "홈그 너무 재미있었다! <br /><br />
-                  갔는지 안 갔는지는 비밀. 제 최애 파트는 앞구르기*3 페이커입니다. "
+                  "LCK 첫 1100판 축하해요! <br /><br />
+                  내가 열 살부터 뛴 선수가 스물셋까지 현역이라니... 그저 고트. "
                 </div>
                 <div className="text-right pt-8">
                   <p className="text-[9px] text-white/20 tracking-[0.3em] italic uppercase">— Logged by Yu-Hyun —</p>
