@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 type EventItem = {
-  type: "match" | "homeground" | "personal" | "holiday" | "exam";
+  type: "match" | "ewc" | "personal" | "holiday" | "exam";
   label: string;
   sub?: string;
   result?: "W" | "L";
@@ -13,48 +13,104 @@ type EventItem = {
 
 const EVENTS: Record<string, EventItem[]> = {
   // ─ 기념일
-  "2026-04-04": [
-    { type: "holiday", label: "한식" },
-    { type: "match", label: "T1 vs HLE", sub: "LCK 정규시즌", result: "W", score: "2 - 0", venue: "LoL Park" },
+  "2026-05-05": [
+    { type: "holiday", label: "어린이날" },
   ],
-  "2026-04-05": [
-    { type: "holiday", label: "식목일" },
+  "2026-05-08": [
+    { type: "holiday", label: "어버이날" },
+    { type: "match", label: "T1 vs DNS", sub: "LCK 정규시즌 2R", result: "W", score: "2 - 0", venue: "치지직 롤파크" },
   ],
-  "2026-04-08": [
-    { type: "match", label: "T1 vs GEN", sub: "LCK 정규시즌", result: "L", score: "0 - 2", venue: "LoL Park" },
+  "2026-05-10": [
+    { type: "match", label: "T1 vs DK", sub: "LCK 정규시즌 2R", result: "W", score: "2 - 0", venue: "치지직 롤파크" },
   ],
-  "2026-04-10": [
-    { type: "match", label: "DNS vs T1", sub: "LCK 정규시즌", venue: "LoL Park" },
+  "2026-05-11": [
+    { type: "personal", label: "🎻 사촌 동생 클래식 공연" },
   ],
-  "2026-04-11": [
-    { type: "personal", label: "🖌️ 서예실 정기 모임" },
+  "2026-05-12": [
+    { type: "ewc", label: "BFX vs T1", sub: "Road to EWC 승자조 2R", result: "W", score: "2 - 0" },
   ],
-  "2026-04-17": [
-    { type: "match", label: "DK vs T1", sub: "LCK 정규시즌", venue: "LoL Park" },
+  "2026-05-13": [
+    { type: "match", label: "T1 LCK 7주차", sub: "LCK 정규시즌 2R", venue: "치지직 롤파크" },
   ],
-  "2026-04-19": [
-    { type: "match", label: "KRX vs T1", sub: "LCK 정규시즌", venue: "LoL Park" },
+  "2026-05-15": [
+    { type: "holiday", label: "스승의날" },
+    { type: "match", label: "T1 LCK 7주차", sub: "LCK 정규시즌 2R", venue: "치지직 롤파크" },
+  ],
+  "2026-05-18": [
+    { type: "ewc", label: "Road to EWC 패자조 1R", sub: "온라인 진행" },
+  ],
+  "2026-05-19": [
+    { type: "ewc", label: "Road to EWC 패자조 2R", sub: "온라인 진행" },
+    { type: "personal", label: "🎭 빌리 엘리어트 뮤지컬" },
+  ],
+  "2026-05-25": [
+    { type: "ewc", label: "Road to EWC 3R", sub: "SOOP 콜로세움 (오프라인)", venue: "상암 SOOP 콜로세움" },
+  ],
+  "2026-05-26": [
+    { type: "ewc", label: "Road to EWC 결승", sub: "SOOP 콜로세움 (오프라인)", venue: "상암 SOOP 콜로세움" },
+  ],
+  "2026-05-28": [
+    { type: "personal", label: "✂️ 미용실 예약" },
+  ],
+  "2026-05-30": [
+    { type: "personal", label: "🎤 결혼식 축가" },
   ],
 
-  // ─ 시험기간 (20~26)
-  "2026-04-20": [{ type: "exam", label: "선형대수", sub: "시험기간 시작" }],
-  "2026-04-21": [{ type: "exam", label: "시험기간" }],
-  "2026-04-22": [
-    { type: "exam", label: "통계학", sub: "시험기간" },
-    { type: "exam", label: "현대시 읽기", sub: "시험기간" },
+  // ─ Road to EWC 1R
+  "2026-05-04": [
+    { type: "ewc", label: "T1 vs BRO", sub: "Road to EWC 1R", result: "W", score: "2 - 0" },
   ],
-  "2026-04-23": [{ type: "exam", label: "자료구조", sub: "시험기간" }],
-  "2026-04-24": [
-    { type: "exam", label: "시험기간" },
-    { type: "homeground", label: "T1 HOME GROUND DAY 1", sub: "Inspire Arena", venue: "Inspire Arena" },
+  "2026-05-05": [
+    { type: "holiday", label: "어린이날" },
   ],
-  "2026-04-25": [
-    { type: "exam", label: "시험기간" },
-    { type: "homeground", label: "T1 vs BRO", sub: "HOME GROUND", venue: "Inspire Arena" },
+};
+
+// 5/5에 두 이벤트 합치기 (holiday + 어린이날 중복 제거)
+const EVENTS_FIXED: Record<string, EventItem[]> = {
+  "2026-05-04": [
+    { type: "ewc", label: "T1 vs BRO", sub: "Road to EWC 1R", result: "W", score: "2 - 0" },
   ],
-  "2026-04-26": [
-    { type: "exam", label: "시험기간 마지막 날" },
-    { type: "homeground", label: "T1 vs BFX", sub: "HOME GROUND", venue: "Inspire Arena" },
+  "2026-05-05": [
+    { type: "holiday", label: "어린이날" },
+  ],
+  "2026-05-08": [
+    { type: "holiday", label: "어버이날" },
+    { type: "match", label: "T1 vs DNS", sub: "LCK 정규시즌 2R", result: "W", score: "2 - 0", venue: "치지직 롤파크" },
+  ],
+  "2026-05-10": [
+    { type: "match", label: "T1 vs DK", sub: "LCK 정규시즌 2R", result: "W", score: "2 - 0", venue: "치지직 롤파크" },
+  ],
+  "2026-05-11": [
+    { type: "personal", label: "🎻 사촌 동생 클래식 공연" },
+  ],
+  "2026-05-12": [
+    { type: "ewc", label: "BFX vs T1", sub: "Road to EWC 승자조 2R", result: "W", score: "2 - 0" },
+  ],
+  "2026-05-13": [
+    { type: "match", label: "T1 LCK 7주차", sub: "LCK 정규시즌 2R", venue: "치지직 롤파크" },
+  ],
+  "2026-05-15": [
+    { type: "holiday", label: "스승의날" },
+    { type: "match", label: "T1 LCK 7주차", sub: "LCK 정규시즌 2R", venue: "치지직 롤파크" },
+  ],
+  "2026-05-18": [
+    { type: "ewc", label: "Road to EWC 패자조 1R", sub: "온라인 진행" },
+  ],
+  "2026-05-19": [
+    { type: "ewc", label: "Road to EWC 패자조 2R", sub: "온라인 진행" },
+    { type: "personal", label: "🎭 빌리 엘리어트 뮤지컬" },
+  ],
+  "2026-05-25": [
+    { type: "ewc", label: "Road to EWC 3R", sub: "SOOP 콜로세움 (오프라인)", venue: "상암 SOOP 콜로세움" },
+  ],
+  "2026-05-26": [
+    { type: "ewc", label: "Road to EWC 결승", sub: "EWC 진출권 결정", venue: "상암 SOOP 콜로세움" },
+  ],
+  "2026-05-28": [
+    { type: "personal", label: "✂️ 미용실 예약" },
+  ],
+  "2026-05-30": [
+    { type: "personal", label: "🎤 결혼식 축가" },
   ],
 };
 
@@ -64,7 +120,7 @@ const TYPE_STYLE = {
     text: "text-[#E4002B]",
     badge: "border-[#E4002B]/40 text-[#E4002B]",
   },
-  homeground: {
+  ewc: {
     dot: "bg-[#C89B3C]",
     text: "text-[#C89B3C]",
     badge: "border-[#C89B3C]/40 text-[#C89B3C]",
@@ -98,7 +154,7 @@ export default function Schedule() {
   const [selected, setSelected] = useState<string | null>(null);
 
   const year = 2026;
-  const month = 3; // 0-indexed = April
+  const month = 4; // 0-indexed = May
   const daysInMonth = getDaysInMonth(year, month);
   const firstDay = getFirstDay(year, month);
 
@@ -106,7 +162,7 @@ export default function Schedule() {
   const blanks = Array.from({ length: firstDay });
   const weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-  const selectedEvents = selected ? EVENTS[selected] ?? [] : [];
+  const selectedEvents = selected ? EVENTS_FIXED[selected] ?? [] : [];
 
   return (
     <main className="min-h-screen bg-[#030303] text-white font-sans overflow-x-hidden">
@@ -125,7 +181,7 @@ export default function Schedule() {
             <div>
               <h1 className="text-3xl font-black tracking-tighter text-[#E4002B]">SCHEDULE</h1>
               <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.4em] text-white/20">
-                The Archive: April 2026
+                The Archive: May 2026
               </p>
             </div>
           </div>
@@ -142,8 +198,7 @@ export default function Schedule() {
         <div className="mb-8 flex flex-wrap gap-4">
           {[
             { type: "match", label: "LCK 경기" },
-            { type: "homeground", label: "HOME GROUND" },
-            { type: "exam", label: "시험기간" },
+            { type: "ewc", label: "Road to EWC" },
             { type: "personal", label: "유현 일정" },
             { type: "holiday", label: "기념일" },
           ].map(({ type, label }) => (
@@ -182,13 +237,12 @@ export default function Schedule() {
               ))}
 
               {days.map((day) => {
-                const dateStr = `2026-04-${String(day).padStart(2, "0")}`;
-                const events = EVENTS[dateStr] ?? [];
+                const dateStr = `2026-05-${String(day).padStart(2, "0")}`;
+                const events = EVENTS_FIXED[dateStr] ?? [];
                 const isSelected = selected === dateStr;
                 const dow = (firstDay + day - 1) % 7;
                 const isSun = dow === 0;
                 const isSat = dow === 6;
-                const hasExam = events.some((e) => e.type === "exam");
 
                 return (
                   <div
@@ -196,7 +250,7 @@ export default function Schedule() {
                     onClick={() => setSelected(isSelected ? null : dateStr)}
                     className={`relative min-h-[80px] cursor-pointer border-b border-r border-white/[0.03] p-2 transition-all duration-200 ${
                       isSelected ? "border-[#E4002B]/20 bg-[#E4002B]/8" : "hover:bg-white/[0.02]"
-                    } ${hasExam ? "bg-purple-950/10" : ""}`}
+                    }`}
                   >
                     {/* 날짜 숫자 */}
                     <div
@@ -238,7 +292,7 @@ export default function Schedule() {
                 {/* 선택된 날짜 헤더 */}
                 <div className="flex items-center justify-between border-b border-white/5 px-5 py-4">
                   <div>
-                    <p className="text-[9px] font-black uppercase tracking-widest text-white/20">April 2026</p>
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white/20">May 2026</p>
                     <p className="text-2xl font-black tracking-tighter text-white">
                       {parseInt(selected.split("-")[2], 10)}
                     </p>
@@ -261,13 +315,11 @@ export default function Schedule() {
                         <span className={`text-[9px] font-black uppercase tracking-widest ${TYPE_STYLE[ev.type].text}`}>
                           {ev.type === "match"
                             ? "LCK"
-                            : ev.type === "homeground"
-                              ? "HOME GROUND"
-                              : ev.type === "exam"
-                                ? "시험기간"
-                                : ev.type === "holiday"
-                                  ? "기념일"
-                                  : "유현"}
+                            : ev.type === "ewc"
+                              ? "ROAD TO EWC"
+                              : ev.type === "holiday"
+                                ? "기념일"
+                                : "유현"}
                         </span>
                       </div>
 
@@ -315,7 +367,7 @@ export default function Schedule() {
 
         {/* 푸터 */}
         <footer className="mt-8 flex items-center justify-between text-[8px] font-bold uppercase tracking-[0.2em] text-white/10">
-          <p>* Venue: LoL Park & Inspire Arena</p>
+          <p>* Venue: 치지직 롤파크 & 상암 SOOP 콜로세움</p>
           <p>Verified by T1 Official Schedule</p>
         </footer>
       </div>
