@@ -256,8 +256,8 @@ export default function Home() {
               <div className="space-y-8 py-10 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                 <div className="h-[2px] w-10 bg-[#E4002B]" />
                 <div className="text-[14px] leading-loose text-white/60 font-light break-keep">
-                  "장난치고 싶어요. <br /><br />
-                  콕콕 눌러 보고 싶구요. "
+                  "LCK 2위 축하합니다! 그래도 저한테는 언제나 4위예요.  <br /><br />
+                  우리 엄마 사위. "
                 </div>
                 <div className="text-right pt-8">
                   <p className="text-[9px] text-white/20 tracking-[0.3em] italic uppercase">— Logged by Yu-Hyun —</p>
