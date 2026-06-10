@@ -26,7 +26,7 @@ export const commissions: Commission[] = [
     kind: "art",
     file: "/ynm.png",
     title: "독백",
-    subtitle: "그림 커미션",
+    subtitle: "글 커미션",
     note: "상혁의 독백. 말하지 않는 사람의 말이 여기 있다.",
     ratio: "3/4",
   },
