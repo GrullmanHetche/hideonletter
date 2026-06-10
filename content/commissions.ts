@@ -9,6 +9,8 @@ export type Commission = {
   linkedTo?: { href: string; label: string };
   /** art 전용: 액자 비율 */
   ratio?: string;
+  /** 같은 작가의 연작 묶음 표시 (선택) */
+  series?: string;
 };
 
 export const commissions: Commission[] = [
@@ -26,9 +28,47 @@ export const commissions: Commission[] = [
     kind: "art",
     file: "/ynm.png",
     title: "독백",
-    subtitle: "글 커미션",
+    subtitle: "그림 커미션",
     note: "상혁의 독백. 말하지 않는 사람의 말이 여기 있다.",
     ratio: "3/4",
+  },
+  {
+    id: "yhfull",
+    kind: "art",
+    file: "/yhfull.jpg",
+    title: "한 판 꽉",
+    subtitle: "그림 커미션 · 선화",
+    note: "유현을 화면 가득 담은 선화. 여백 없이 꽉 찬 한 장.",
+    ratio: "3/4",
+  },
+  {
+    id: "childshyh",
+    kind: "art",
+    file: "/childshyh.gif",
+    title: "손바닥 위의 상혁",
+    subtitle: "그림 커미션 · 어린이날",
+    note: "어린이날 기념. 어린이가 된 유현이 상혁을 손에 들고 있다. 움직이는 그림.",
+    ratio: "1/1",
+  },
+  {
+    id: "mirrorsy",
+    kind: "art",
+    file: "/mirrorsy.jpg",
+    title: "방, 거울",
+    subtitle: "그림 커미션 · 거울 연작",
+    note: "방 안에서 둘이 함께 찍은 거울 셀카.",
+    ratio: "3/4",
+    series: "거울 연작",
+  },
+  {
+    id: "snowsy",
+    kind: "art",
+    file: "/snowsy.jpg",
+    title: "겨울, 거울",
+    subtitle: "그림 커미션 · 거울 연작",
+    note: "겨울날의 거울 셀카. 〈방, 거울〉과 같은 작가의 같은 손끝.",
+    ratio: "3/4",
+    series: "거울 연작",
   },
   {
     id: "leon",
