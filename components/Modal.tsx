@@ -20,13 +20,23 @@ export default function Modal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
+  // open 토글 시에만: 스크롤 잠금 + 최초 포커스 + 닫힐 때 포커스 복원
+  // (입력 중에는 실행되지 않으므로 키보드 포커스를 가로채지 않음)
   useEffect(() => {
     if (!open) return;
     const prev = document.activeElement as HTMLElement | null;
     document.body.style.overflow = "hidden";
-    const node = ref.current;
-    node?.querySelector<HTMLElement>("button, [href], input")?.focus();
+    ref.current?.querySelector<HTMLElement>("input, button, [href]")?.focus();
+    return () => {
+      document.body.style.overflow = "";
+      prev?.focus();
+    };
+  }, [open]);
 
+  // ESC/Tab 처리 — onClose가 바뀌면 리스너만 재등록되고 포커스는 건드리지 않음
+  useEffect(() => {
+    if (!open) return;
+    const node = ref.current;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "Tab" && node) {
@@ -40,11 +50,7 @@ export default function Modal({
       }
     };
     window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-      prev?.focus();
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
   return (
