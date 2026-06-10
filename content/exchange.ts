@@ -17,7 +17,7 @@ export const exchanges: ExchangeItem[] = [
     kind: "movie",
     title: "레옹",
     year: "Léon · 1994",
-    note: "함께 본 첫 영화. 유현은 이 영화를 다 보고 한참을 말없이 걸었다. 이 영화로 받은 글 커미션이 전시실에 있다.",
+    note: "함께 본 첫 영화. 유현은 영화가 끝나고 한참을 말없이 걸었다. 이 영화로 받은 글 커미션이 전시실에 있다.",
     linkedTo: { href: "/commission", label: "받은 글 보기 →" },
   },
   {
@@ -35,6 +35,22 @@ export const exchanges: ExchangeItem[] = [
     title: "Lover",
     artist: "Taylor Swift",
     note: "유현이 보낸 곡. 설명은 없었다. 제목만으로 충분하다고 생각했기 때문이다.",
+  },
+  {
+    id: "87dance",
+    kind: "song",
+    from: "sh",
+    title: "87dance",
+    artist: "beautiful complex",
+    note: "상혁이 건넨 곡. 96년생이 87을 보내는 건 무슨 의미일까, 유현은 한참을 생각했다.",
+  },
+  {
+    id: "hush",
+    kind: "song",
+    from: "yh",
+    title: "Hush",
+    artist: "도깨비 OST",
+    note: "유현이 골라 보낸 도깨비 OST. 쓸쓸한 계절을 함께 건너자는 말은 끝내 적지 못했다.",
   },
 ];
 
