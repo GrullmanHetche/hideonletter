@@ -25,12 +25,11 @@ export const commissions: Commission[] = [
   },
   {
     id: "ynm",
-    kind: "art",
+    kind: "text",
     file: "/ynm.png",
     title: "독백",
-    subtitle: "글 커미션",
-    note: "상혁의 독백. 말하지 않는 사람의 말이 여기 있다.",
-    ratio: "3/4",
+    subtitle: "글 커미션 · 이상혁 시점",
+    note: "상혁의 시점에서 쓰인 독백. 말하지 않는 사람의 말이 여기 있다.",
   },
   {
     id: "yhfull",
