@@ -27,15 +27,17 @@ function ArtFrame({ c, index }: { c: Commission; index: number }) {
           </span>
         )}
         <div className="border-[10px] border-ink-soft bg-ink p-3 md:border-[14px]">
-          <div className="relative w-full overflow-hidden" style={{ aspectRatio: c.ratio ?? "3/4" }}>
+          <div className="group/img relative overflow-hidden">
             <Image
               src={c.file}
               alt={`${c.title} — ${c.note}`}
-              fill
+              width={0}
+              height={0}
               sizes="(max-width: 768px) 90vw, 460px"
+              // 고정 비율로 자르지 않고 사진 원본 비율 그대로 → 액자가 사진에 맞춰짐
               // GIF는 최적화하면 정지하므로 원본 그대로 (애니메이션 보존)
               unoptimized={c.file.endsWith(".gif")}
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.02]"
             />
             {/* 스포트라이트 */}
             <span
@@ -82,7 +84,9 @@ function ManuscriptCard({ c, index, onOpen }: { c: Commission; index: number; on
             <span className="text-[11px] font-black uppercase tracking-[0.35em] text-paper/40 transition-colors group-hover:text-paper">
               원고 펼치기 →
             </span>
-            <span aria-hidden className="text-[11px] uppercase tracking-[0.25em] text-paper/25">PDF</span>
+            <span aria-hidden className="text-[11px] uppercase tracking-[0.25em] text-paper/25">
+              {/\.(png|jpe?g|gif|webp)$/i.test(c.file) ? "Image" : "PDF"}
+            </span>
           </div>
         </div>
       </button>
@@ -124,7 +128,7 @@ export default function CommissionGallery() {
           <span aria-hidden className="h-px flex-1 bg-white/8" />
           <span className="text-[11px] tabular-nums tracking-[0.3em] text-paper/30">{arts.length}점</span>
         </div>
-        <div className="grid grid-cols-1 gap-14 md:grid-cols-2 md:gap-12">
+        <div className="gap-12 md:columns-2 [&>*]:mb-14 md:[&>*]:mb-12 [&>*]:break-inside-avoid">
           {arts.map((c, i) => <ArtFrame key={c.id} c={c} index={i} />)}
         </div>
       </section>
@@ -145,7 +149,7 @@ export default function CommissionGallery() {
         </div>
       </section>
 
-      {/* PDF 뷰어 모달 — 미지원 환경 폴백 포함 */}
+      {/* 원고 뷰어 모달 — 이미지/PDF 자동 분기, 미지원 환경 폴백 포함 */}
       <Modal
         open={openDoc !== null}
         onClose={() => setOpenDoc(null)}
@@ -159,11 +163,23 @@ export default function CommissionGallery() {
               <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gold/70">{openDoc.subtitle}</p>
               <h3 className="mt-2 font-serif text-2xl text-paper">{openDoc.title}</h3>
             </div>
-            <object data={openDoc.file} type="application/pdf" className="h-[70vh] w-full bg-ink" aria-label={`${openDoc.title} PDF`}>
-              <div className="flex h-[30vh] flex-col items-center justify-center gap-4 border border-white/10">
-                <p className="text-[13px] text-paper/50">이 브라우저에서는 문서를 바로 표시할 수 없습니다.</p>
-              </div>
-            </object>
+            {/\.(png|jpe?g|gif|webp)$/i.test(openDoc.file) ? (
+              <Image
+                src={openDoc.file}
+                alt={`${openDoc.title} — ${openDoc.note}`}
+                width={0}
+                height={0}
+                sizes="(max-width: 768px) 86vw, 700px"
+                unoptimized={openDoc.file.endsWith(".gif")}
+                className="mx-auto block h-auto w-full bg-ink"
+              />
+            ) : (
+              <object data={openDoc.file} type="application/pdf" className="h-[70vh] w-full bg-ink" aria-label={`${openDoc.title} PDF`}>
+                <div className="flex h-[30vh] flex-col items-center justify-center gap-4 border border-white/10">
+                  <p className="text-[13px] text-paper/50">이 브라우저에서는 문서를 바로 표시할 수 없습니다.</p>
+                </div>
+              </object>
+            )}
             <a
               href={openDoc.file}
               target="_blank"
