@@ -67,53 +67,70 @@ export default function HomeClient() {
               onClick={openEnvelope}
               aria-label="봉투 열기"
               className="group relative outline-offset-8"
-              style={{ perspective: 1200 }}
             >
-              {/* 봉투 본체 */}
-              <div className="relative h-[230px] w-[330px] border border-white/10 bg-ink-soft shadow-[0_30px_80px_rgba(228,0,43,0.12)] md:h-[270px] md:w-[400px]">
-                {/* 봉투 안 편지지 — 개봉 시 위로 */}
+              {/* 봉투 본체 — 층위: 뒷면(z0) < 편지지(z10) < 앞주머니(z20) < 플랩(z30) < 실(z40) */}
+              <div
+                className="relative h-[230px] w-[330px] md:h-[270px] md:w-[400px]"
+                style={{ perspective: 1400 }}
+              >
+                {/* 0. 봉투 뒷면 */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 z-0 border border-white/10 bg-ink-soft shadow-[0_30px_80px_rgba(228,0,43,0.12)]"
+                />
+
+                {/* 1. 편지지 — 봉투 뒤에서 위로 솟아오름 (z-10, 앞주머니 뒤) */}
                 <motion.div
                   initial={false}
-                  animate={stage === "opening" ? { y: -120, opacity: 1 } : { y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
-                  className="absolute inset-x-6 bottom-3 top-6 bg-paper"
+                  animate={
+                    stage === "opening"
+                      ? { y: -150, opacity: 1, scale: 1.02 }
+                      : { y: 0, opacity: 1, scale: 1 }
+                  }
+                  transition={{ delay: 0.55, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute bottom-[16px] left-5 right-5 z-10 h-[172px] origin-bottom bg-paper shadow-[0_-8px_24px_rgba(0,0,0,0.25)] md:h-[200px]"
                 >
-                  <p className="px-5 pt-5 font-serif text-[13px] leading-relaxed text-ink/70">
+                  <span aria-hidden className="absolute inset-x-0 top-7 h-px bg-ink/10" />
+                  <p className="px-5 pt-9 text-center font-serif text-[14px] leading-[1.9] text-ink/70">
                     다정한 무지 속에
                     <br />
                     머무는 기록.
                   </p>
                 </motion.div>
-                {/* 봉투 앞면 하단 */}
+
+                {/* 2. 봉투 앞주머니 (V) — 편지지 가림 (z-20) */}
                 <div
                   aria-hidden
-                  className="absolute inset-x-0 bottom-0 h-[55%] bg-ink-soft"
-                  style={{ clipPath: "polygon(0 0, 50% 38%, 100% 0, 100% 100%, 0 100%)", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+                  className="absolute inset-x-0 bottom-0 z-20 h-[55%] bg-gradient-to-b from-[#141416] to-ink-soft"
+                  style={{ clipPath: "polygon(0 0, 50% 40%, 100% 0, 100% 100%, 0 100%)", borderRight: "1px solid rgba(255,255,255,0.05)", borderLeft: "1px solid rgba(255,255,255,0.05)" }}
                 />
-                {/* 플랩 — rotateX로 개봉 */}
+
+                {/* 3. 플랩 — rotateX로 위로 열림 (z-30) */}
                 <motion.div
                   aria-hidden
                   initial={false}
-                  animate={stage === "opening" ? { rotateX: -180 } : { rotateX: 0 }}
+                  animate={stage === "opening" ? { rotateX: -178 } : { rotateX: 0 }}
                   transition={{ duration: 0.7, ease: [0.65, 0, 0.35, 1] }}
-                  style={{ transformOrigin: "top center", clipPath: "polygon(0 0, 100% 0, 50% 92%)" }}
-                  className="absolute inset-x-0 top-0 z-10 h-[52%] border-b border-white/10 bg-[#141416]"
+                  style={{ transformOrigin: "top center", transformStyle: "preserve-3d", clipPath: "polygon(0 0, 100% 0, 50% 92%)" }}
+                  className="absolute inset-x-0 top-0 z-30 h-[52%] border border-white/10 bg-gradient-to-b from-ink-soft to-[#141416]"
                 />
-                {/* 왁스 실 */}
+
+                {/* 4. 왁스 실 — 제자리에서 작아지며 사라짐 (z-40) */}
                 <motion.div
                   initial={false}
                   animate={
                     stage === "opening"
-                      ? { scale: 0.6, opacity: 0, rotate: 18, y: 30 }
-                      : { scale: 1, opacity: 1 }
+                      ? { scale: 0.5, opacity: 0, rotate: 14 }
+                      : { scale: 1, opacity: 1, rotate: 0 }
                   }
-                  transition={{ duration: 0.45 }}
-                  className="absolute left-1/2 top-[42%] z-20 -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 group-hover:scale-105"
+                  transition={{ duration: 0.4, ease: "easeIn" }}
+                  className="absolute left-1/2 top-[40%] z-40 -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 group-hover:scale-105"
                 >
                   <WaxSeal size={96} />
                 </motion.div>
+
                 {/* 수신인 */}
-                <div className="absolute bottom-4 right-5 z-10 text-right">
+                <div className="absolute bottom-4 right-5 z-20 text-right">
                   <p className="font-display text-[10px] font-bold uppercase tracking-[0.4em] text-gold/70">To. You</p>
                   <p className="mt-1 text-[10px] tracking-[0.25em] text-paper/30">from S.H. &amp; Y.H.</p>
                 </div>
