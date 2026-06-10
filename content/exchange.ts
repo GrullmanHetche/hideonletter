@@ -17,7 +17,7 @@ export const exchanges: ExchangeItem[] = [
     kind: "movie",
     title: "레옹",
     year: "Léon · 1994",
-    note: "함께 본 첫 영화. 끝나고 한참을 말없이 걸었다. 이 영화로 받은 글 커미션이 전시실에 있다.",
+    note: "함께 본 첫 영화. 유현은 이 영화를 다 보고 한참을 말없이 걸었다. 이 영화로 받은 글 커미션이 전시실에 있다.",
     linkedTo: { href: "/commission", label: "받은 글 보기 →" },
   },
   {
