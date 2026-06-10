@@ -20,6 +20,12 @@ function ArtFrame({ c, index }: { c: Commission; index: number }) {
       {/* 액자: 골드 몰딩 + 매트 + 스포트라이트 */}
       <div className="relative border-[6px] border-[#2a2117] bg-[#1a1410] p-1 shadow-[0_30px_70px_rgba(0,0,0,0.7)] transition-transform duration-500 group-hover:-translate-y-1">
         <span aria-hidden className="pointer-events-none absolute inset-0 border border-gold/30" />
+        {/* 연작 리본 */}
+        {c.series && (
+          <span className="absolute -right-2 top-4 z-10 bg-gold px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-ink shadow-md">
+            {c.series}
+          </span>
+        )}
         <div className="border-[10px] border-ink-soft bg-ink p-3 md:border-[14px]">
           <div className="relative w-full overflow-hidden" style={{ aspectRatio: c.ratio ?? "3/4" }}>
             <Image
@@ -27,6 +33,8 @@ function ArtFrame({ c, index }: { c: Commission; index: number }) {
               alt={`${c.title} — ${c.note}`}
               fill
               sizes="(max-width: 768px) 90vw, 460px"
+              // GIF는 최적화하면 정지하므로 원본 그대로 (애니메이션 보존)
+              unoptimized={c.file.endsWith(".gif")}
               className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
             />
             {/* 스포트라이트 */}
