@@ -1,14 +1,15 @@
-"use client";
+ "use client";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { dialogues, type Msg } from "@/content/moments";
 
-/* "(사진)" 텍스트 → 폴라로이드 슬롯 분리 */
+/* "(사진)" · "(셀카)" → 폴라로이드 슬롯 분리, "(링크)" → 링크 아이콘 */
 function Bubble({ msg }: { msg: Msg }) {
   const mine = msg.side === "right";
-  const hasPhoto = msg.text?.startsWith("(사진)");
+  const photoMatch = msg.text?.match(/^\((사진|셀카)\)/);
+  const hasPhoto = Boolean(photoMatch);
   const hasLink = msg.text?.startsWith("(링크)");
-  const body = msg.text?.replace(/^\((사진|링크)\)\s*/, "");
+  const body = msg.text?.replace(/^\((사진|셀카|링크)\)\s*/, "");
 
   if (msg.type === "eyes") {
     return <p className={`py-1 text-5xl leading-none ${mine ? "text-right" : ""}`}>👀</p>;
@@ -18,7 +19,12 @@ function Bubble({ msg }: { msg: Msg }) {
     <div className={`flex flex-col gap-1.5 ${mine ? "items-end" : "items-start"}`}>
       {hasPhoto && (
         <figure className={`w-40 border bg-white p-2 pb-6 shadow-lg ${mine ? "rotate-1" : "-rotate-1"} border-black/10`}>
-          <span className="flex h-28 items-center justify-center bg-ink-soft text-2xl" role="img" aria-label="사진">📷</span>
+          <span className="flex h-28 items-center justify-center bg-ink-soft text-2xl" role="img" aria-label={photoMatch?.[1] ?? "사진"}>
+            {photoMatch?.[1] === "셀카" ? "🤳" : "📷"}
+          </span>
+          <figcaption className="mt-1.5 text-center text-[9px] uppercase tracking-[0.2em] text-black/40">
+            {photoMatch?.[1] === "셀카" ? "selfie" : "photo"}
+          </figcaption>
         </figure>
       )}
       {body && (
@@ -81,7 +87,7 @@ export default function LockScreen() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={reduced ? { opacity: 0 } : { y: "-100%", opacity: 0.4 }}
                 transition={{ duration: 0.45, ease: [0.65, 0, 0.35, 1] }}
-                className="flex flex-1 flex-col overflow-hidden"
+                className="flex flex-1 flex-col overflow-hidden min-h-0"
               >
                 {/* 배경 룬 워터마크 */}
                 <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.05]">
@@ -97,7 +103,7 @@ export default function LockScreen() {
                 </div>
 
                 {/* 알림 스택 */}
-                <ul className="relative z-10 mt-10 flex-1 space-y-3 overflow-y-auto px-4 pb-8">
+                <ul className="relative z-10 mt-10 min-h-0 flex-1 space-y-3 overflow-y-auto px-4 pb-8">
                   {dialogues.map((d, i) => {
                     const preview = d.messages.find((m) => m.text)?.text ?? "👀";
                     return (
@@ -119,7 +125,7 @@ export default function LockScreen() {
                             <span className="text-[11px] tabular-nums tracking-wider text-paper/40">{d.date}</span>
                           </span>
                           <span className="mt-2 line-clamp-2 block text-[13px] leading-relaxed text-paper/60 group-hover:text-paper/80">
-                            {preview.replace(/^\((사진|링크)\)\s*/, (m) => (m.includes("사진") ? "📷 " : "🔗 "))}
+                            {preview.replace(/^\((사진|셀카|링크)\)\s*/, (m) => (m.includes("링크") ? "🔗 " : m.includes("셀카") ? "🤳 " : "📷 "))}
                           </span>
                           <span className="mt-1.5 block text-[10px] uppercase tracking-[0.25em] text-paper/30">
                             메시지 {d.messages.length}개 · 눌러서 열기
@@ -138,7 +144,7 @@ export default function LockScreen() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="flex flex-1 flex-col"
+                className="flex flex-1 flex-col min-h-0"
               >
                 <div className="flex items-center justify-between border-b border-white/8 px-4 py-4 pt-8 md:pt-10">
                   <button
@@ -151,14 +157,13 @@ export default function LockScreen() {
                   <span className="w-14" aria-hidden />
                 </div>
 
-                <div className="flex-1 space-y-3 overflow-y-auto px-4 py-6">
+                <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-6">
                   {current.messages.map((m, i) => (
                     <motion.div
                       key={i}
                       initial={reduced ? false : { opacity: 0, y: 8 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-20px" }}
-                      transition={{ duration: 0.3 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: reduced ? 0 : Math.min(i, 14) * 0.035 }}
                     >
                       <Bubble msg={m} />
                     </motion.div>
