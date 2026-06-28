@@ -7,6 +7,12 @@ export type EventItem = {
   venue?: string;
 };
 
+export type Season = { label: string; from: string; to: string };  // from/to = YYYY-MM-DD, to 포함
+
+export const SEASONS: Season[] = [
+  { label: "MSI 2026", from: "2026-06-29", to: "2026-07-12" },
+];
+
 export const EVENTS: Record<string, EventItem[]> = {
 
   // ─ 기념일
