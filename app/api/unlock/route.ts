@@ -6,9 +6,9 @@ import { createHash } from "crypto";
 const PASS_HASH =
   "5b697282df7a44230864437a0821d72986f8406b769c9a1797bad56e269ffb7a"; // placeholder — 아래에서 실제 해시로 교체됨
 
-const SECRET_MESSAGE = `"이상혁이 필요합니다.
+const SECRET_MESSAGE = `"살면서 받은 고백 중에 제일 환상적이었어요.
 
-시험 기간 긴급 고냐니 수혈. "`;
+얼마나 기다렸는지 아시나요. "`;
 
 export async function POST(req: Request) {
   const { pass } = (await req.json().catch(() => ({}))) as { pass?: string };
