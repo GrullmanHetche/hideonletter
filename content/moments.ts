@@ -3,7 +3,7 @@ export type Msg = {
 };
 export type Dialogue = { date: string; messages: Msg[] };
 
-export const dialogues: Dialogue[] = [
+export type Dialogue = { date: string; featured?: boolean; messages: Msg[] };
   {
     date: "2026.04.11",
     messages: [
