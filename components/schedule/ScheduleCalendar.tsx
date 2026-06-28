@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { EVENTS, type EventItem } from "@/content/schedule";
+import { EVENTS, SEASONS, type EventItem } from "@/content/schedule";
 
 const TYPE_STYLE = {
   match: { dot: "bg-t1-red", text: "text-t1-red", badge: "border-t1-red/40 text-t1-red" },
@@ -21,6 +21,8 @@ const LEGEND = [
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const ym = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}`;
+const seasonFor = (dateStr: string) =>
+  SEASONS.find((s) => dateStr >= s.from && dateStr <= s.to) ?? null;
 
 /** .ics 내보내기 — 전체 이벤트를 실제 캘린더로 구독 */
 function downloadICS() {
@@ -93,6 +95,9 @@ export default function ScheduleCalendar() {
   const monthEvents = Object.entries(EVENTS)
     .filter(([d]) => d.startsWith(`${year}-${pad(month0 + 1)}`))
     .sort(([a], [b]) => a.localeCompare(b));
+  const monthStart = `${year}-${pad(month0 + 1)}-01`;
+  const monthEnd = `${year}-${pad(month0 + 1)}-${pad(daysInMonth)}`;
+  const activeSeasons = SEASONS.filter((s) => s.from <= monthEnd && s.to >= monthStart);
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-14 md:px-10 md:py-16">
@@ -143,6 +148,18 @@ export default function ScheduleCalendar() {
           </button>
         </div>
       </div>
+
+      {/* MSI 시즌 띠 배너 */}
+      {activeSeasons.length > 0 && (
+        <div className="mb-6 flex flex-wrap items-center gap-3 border border-gold/25 bg-gold/[0.05] px-4 py-2.5">
+          <span className="h-2 w-2 rounded-full bg-gold" aria-hidden />
+          {activeSeasons.map((s) => (
+            <span key={s.label} className="text-[11px] font-black uppercase tracking-[0.25em] text-gold">
+              {s.label} 시즌 · {s.from.slice(5).replace("-", ".")} – {s.to.slice(5).replace("-", ".")}
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* 데스크톱: 달력 그리드 */}
       <div className="hidden gap-6 md:flex md:flex-col lg:flex-row">
