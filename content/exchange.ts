@@ -52,6 +52,15 @@ export const exchanges: ExchangeItem[] = [
     artist: "도깨비 OST",
     note: "유현이 골라 보낸 도깨비 OST. 쓸쓸한 계절을 함께 건너자는 말은 끝내 적지 못했다.",
   },
+  {
+    id: "lingling",
+    kind: "song",
+    from: "yh",
+    title: "Ling Ling",
+    artist: "검정치마",
+    date: "2026.06.29",
+    note: "유현이 6월의 끝에 보낸 검정치마의 곡. 무슨 말을 덧붙이려다, 결국 제목만 남겼다.",
+  }
 ];
 
 export const songSearch = (t: ExchangeItem) =>
