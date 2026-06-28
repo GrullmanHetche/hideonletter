@@ -1,4 +1,4 @@
- "use client";
+"use client";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { dialogues, type Msg } from "@/content/moments";
@@ -115,12 +115,19 @@ export default function LockScreen() {
                       >
                         <button
                           onClick={() => setOpenIdx(i)}
-                          className="group w-full rounded-2xl border border-white/8 bg-white/[0.05] px-4 py-3.5 text-left backdrop-blur-sm transition-colors hover:border-t1-red/40 hover:bg-white/[0.08]"
+                          className={`group w-full rounded-2xl border px-4 py-3.5 text-left backdrop-blur-sm transition-colors ${
+                            d.featured
+                              ? "border-gold/55 bg-gold/[0.06] shadow-[0_0_30px_rgba(212,175,55,0.18)] hover:border-gold/80 hover:bg-gold/[0.10]"
+                              : "border-white/8 bg-white/[0.05] hover:border-t1-red/40 hover:bg-white/[0.08]"
+                          }`}
                         >
                           <span className="flex items-center justify-between">
                             <span className="flex items-center gap-2.5">
-                              <span aria-hidden className="flex h-7 w-7 items-center justify-center rounded-lg bg-t1-red/15 text-[13px]">💌</span>
+                              <span aria-hidden className={`flex h-7 w-7 items-center justify-center rounded-lg text-[13px] ${d.featured ? "bg-gold/25" : "bg-t1-red/15"}`}>💌</span>
                               <span className="text-[12px] font-bold tracking-wide text-paper">HIDEONLETTER</span>
+                              {d.featured && (
+                                <span className="rounded-full bg-gold/20 px-1.5 py-0.5 text-[8px] font-black uppercase tracking-[0.2em] text-gold">그날</span>
+                              )}
                             </span>
                             <span className="text-[11px] tabular-nums tracking-wider text-paper/40">{d.date}</span>
                           </span>
@@ -146,14 +153,14 @@ export default function LockScreen() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="flex flex-1 flex-col min-h-0"
               >
-                <div className="flex items-center justify-between border-b border-white/8 px-4 py-4 pt-8 md:pt-10">
+                <div className={`flex items-center justify-between px-4 py-4 pt-8 md:pt-10 border-b ${current.featured ? "border-gold/40" : "border-white/8"}`}>
                   <button
                     onClick={() => setOpenIdx(null)}
                     className="text-[11px] font-black uppercase tracking-[0.3em] text-paper/50 transition-colors hover:text-paper"
                   >
                     ← 잠금화면
                   </button>
-                  <p className="text-[12px] font-bold tabular-nums tracking-wider text-paper/60">{current.date}</p>
+                  <p className={`text-[12px] font-bold tabular-nums tracking-wider ${current.featured ? "text-gold" : "text-paper/60"}`}>{current.date}</p>
                   <span className="w-14" aria-hidden />
                 </div>
 
