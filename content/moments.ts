@@ -1,9 +1,9 @@
 export type Msg = {
   side: "left" | "right"; sender: string; text?: string; type?: "eyes";
 };
-export type Dialogue = { date: string; messages: Msg[] };
-
 export type Dialogue = { date: string; featured?: boolean; messages: Msg[] };
+
+export const dialogues: Dialogue[] = [
   {
     date: "2026.04.11",
     messages: [
